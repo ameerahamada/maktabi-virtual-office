@@ -519,6 +519,118 @@
   .dc-send{display:flex;align-items:center;gap:7px;height:46px;padding:0 18px;background:var(--brand);color:#fff;border-radius:13px;font-weight:700;font-size:13.5px;box-shadow:var(--sh-brand);transition:.16s;flex:none}
   .dc-send:hover{background:var(--brand-600)}
 
+  /* ===== workspace-style sidebar (channels / people) ===== */
+  .ws-head{padding:13px 14px 11px;border-bottom:1px solid var(--line)}
+  .ws-top{display:flex;align-items:center;gap:9px}
+  .ws-co{flex:1;min-width:0;display:flex;align-items:center;gap:6px;text-align:start;border-radius:9px;padding:5px 7px;margin:-5px -7px;transition:.14s}
+  .ws-co:hover{background:var(--surface-2)}
+  .ws-co .t{min-width:0;flex:1}
+  .ws-co .t b{display:block;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ws-co .t span{font-size:11.5px;color:var(--muted)}
+  .ws-co .cv{color:var(--muted);flex:none}
+  .ws-invite{height:31px;padding:0 13px;border-radius:9px;background:var(--green);color:#fff;font-weight:700;font-size:12.5px;box-shadow:0 6px 16px rgba(31,157,107,.26);transition:.15s;flex:none}
+  .ws-invite:hover{background:#1b8d60}
+  .ws-me{width:33px;height:33px;border-radius:50%;flex:none;position:relative;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;background:linear-gradient(150deg,#5566e6,#2540da)}
+  .ws-me i{position:absolute;bottom:-1px;inset-inline-end:-1px;width:11px;height:11px;border-radius:50%;background:var(--green);border:2.5px solid var(--surface)}
+
+  .ws-tabs{display:flex;align-items:center;gap:2px;padding:8px 9px;border-bottom:1px solid var(--line)}
+  .ws-tab{padding:7px 10px;border-radius:8px;font-size:13px;font-weight:600;color:var(--muted);transition:.14s;white-space:nowrap}
+  .ws-tab:hover{background:var(--surface-2);color:var(--ink-2)}
+  .ws-tab.active{color:var(--ink);font-weight:700;background:var(--surface-3)}
+  .ws-srch{margin-inline-start:auto;width:32px;height:32px;border-radius:8px;display:grid;place-items:center;color:var(--muted)}
+  .ws-srch:hover{background:var(--surface-2);color:var(--ink)}
+
+  .ws-sec{padding:6px 8px 2px}
+  .ws-sec-h{display:flex;align-items:center;gap:7px;width:100%;padding:6px 8px;border-radius:8px;color:var(--muted);font-size:12px;font-weight:700;transition:.14s}
+  .ws-sec-h:hover{background:var(--surface-2)}
+  .ws-sec-h .c0{transition:.2s;color:var(--faint);display:flex}
+  .ws-sec.collapsed .c0{transform:rotate(-90deg)}
+  .ws-sec-h .lbl{flex:1;text-align:start}
+  .ws-sec-h .act{color:var(--faint);font-weight:700;font-size:15px;line-height:1;padding:0 3px}
+  .ws-sec.collapsed .ws-list{display:none}
+  .ws-ch{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;color:var(--ink-2);font-size:13.5px;font-weight:500;width:100%;text-align:start;transition:.14s}
+  .ws-ch:hover{background:var(--surface-2)}
+  .ws-ch.active{background:var(--brand-tint);color:var(--brand);font-weight:600}
+  .ws-ch .h{color:var(--faint);font-weight:700;width:13px;text-align:center;flex:none}
+  .ws-ch.active .h{color:var(--brand)}
+  .ws-add{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;color:var(--muted);font-size:13px;font-weight:500;width:100%;text-align:start;transition:.14s}
+  .ws-add:hover{background:var(--surface-2);color:var(--ink-2)}
+  .ws-add .p{width:13px;display:grid;place-items:center;color:var(--faint);flex:none}
+  .ws-person{display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:8px;width:100%;text-align:start;transition:.14s}
+  .ws-person:hover{background:var(--surface-2)}
+  .ws-person .pa{width:28px;height:28px;border-radius:50%;flex:none;position:relative;display:grid;place-items:center;color:#fff;font-size:11px;font-weight:700}
+  .ws-person .pa i{position:absolute;bottom:-1px;inset-inline-end:-1px;width:9px;height:9px;border-radius:50%;border:2px solid var(--surface);background:var(--green)}
+  .ws-person .nm2{font-size:13.5px;font-weight:500;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ws-person.off .pa{opacity:.7}
+  .ws-person.off .nm2{color:var(--muted)}
+
+  /* ===== recordings view inside the التسجيلات tab ===== */
+  .rec-view{position:absolute;inset:0;z-index:36;display:none;overflow-y:auto;
+    background:radial-gradient(900px 480px at 60% -10%,#fbfcff 0%,transparent 60%),var(--surface-3)}
+  .rec-view.show{display:block}
+  .rec-view::-webkit-scrollbar{width:10px}
+  .rec-view::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px;border:3px solid var(--surface-3)}
+  .rv-wrap{max-width:880px;margin:0 auto;padding:24px 26px 48px}
+  .rv-head{display:flex;align-items:flex-start;gap:13px;margin-bottom:20px}
+  .rv-hi{width:46px;height:46px;border-radius:13px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;flex:none}
+  .rv-head h1{font-size:22px;font-weight:700;letter-spacing:-.4px}
+  .rv-head p{color:var(--muted);font-size:13.5px;margin-top:3px}
+  .rv-toolbar{display:flex;gap:9px;margin-bottom:16px;flex-wrap:wrap}
+  .rv-search{flex:1;min-width:200px;display:flex;align-items:center;gap:10px;height:42px;padding:0 13px;background:var(--surface);border:1px solid var(--line);border-radius:11px;color:var(--muted);transition:.18s}
+  .rv-search:focus-within{background:#fff;border-color:var(--brand);box-shadow:0 0 0 4px var(--brand-soft)}
+  .rv-search input{flex:1;border:none;background:none;outline:none;font-family:inherit;font-size:13px;color:var(--ink)}
+  .rv-sel{position:relative}
+  .rv-sel select{height:42px;padding:0 13px;padding-inline-start:32px;font-family:inherit;font-size:12.5px;font-weight:600;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:11px;appearance:none;cursor:pointer}
+  .rv-sel select:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px var(--brand-soft)}
+  .rv-sel .cv{position:absolute;inset-inline-start:11px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+  .rv-count{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:11px}
+  .rv-rec{display:flex;align-items:center;gap:14px;padding:14px 15px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-sm);margin-bottom:10px;transition:.18s var(--ease)}
+  .rv-rec:hover{border-color:#cfd4ea;box-shadow:var(--sh-md);transform:translateY(-1px)}
+  .rv-thumb{width:60px;height:60px;border-radius:12px;flex:none;display:grid;place-items:center;position:relative}
+  .rv-thumb .pl{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--brand)}
+  .rv-thumb .du{position:absolute;bottom:4px;inset-inline-end:4px;font-size:9px;font-weight:700;background:rgba(10,12,28,.72);color:#fff;border-radius:5px;padding:1px 5px}
+  .rv-info{flex:1;min-width:0}
+  .rv-ttl{font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rv-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:5px;font-size:11.5px;color:var(--muted)}
+  .rv-meta .ds{width:3px;height:3px;border-radius:50%;background:var(--faint)}
+  .rv-by{display:flex;align-items:center;gap:6px;margin-top:7px;font-size:11.5px;color:var(--ink-2)}
+  .rv-by .a{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:8px;font-weight:700}
+  .rv-right{display:flex;flex-direction:column;align-items:flex-end;gap:9px;flex:none}
+  .rv-badge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;color:#157a51;background:var(--green-soft);border-radius:7px;padding:4px 9px}
+  .rv-open{display:flex;align-items:center;height:36px;padding:0 18px;background:var(--brand);color:#fff;border-radius:10px;font-weight:700;font-size:12.5px;box-shadow:var(--sh-brand);transition:.16s}
+  .rv-open:hover{background:var(--brand-600);transform:translateY(-1px)}
+
+  .rv-scrim{position:fixed;inset:0;background:rgba(15,18,35,.32);backdrop-filter:blur(1.5px);z-index:78;display:none;opacity:0;transition:opacity .25s var(--ease)}
+  .rv-scrim.show{display:block;opacity:1}
+  .rv-details{position:fixed;top:0;inset-inline-start:0;height:100vh;width:400px;background:var(--surface);box-shadow:var(--sh-panel);z-index:79;display:flex;flex-direction:column;transform:translateX(-30px);opacity:0;pointer-events:none;transition:.4s var(--ease)}
+  .rv-details.show{transform:none;opacity:1;pointer-events:auto}
+  .rvd-cover{height:150px;position:relative;display:grid;place-items:center}
+  .rvd-cover::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.14) 1px,transparent 1px);background-size:16px 16px;opacity:.5}
+  .rvd-play{width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;color:var(--brand);box-shadow:var(--sh-lg);z-index:2;cursor:pointer;transition:.16s}
+  .rvd-play:hover{transform:scale(1.06)}
+  .rvd-dur{position:absolute;bottom:12px;inset-inline-end:14px;font-size:11px;font-weight:700;background:rgba(10,12,28,.7);color:#fff;border-radius:7px;padding:3px 9px;z-index:2}
+  .rvd-rec{position:absolute;top:12px;inset-inline-start:14px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;background:rgba(10,12,28,.45);color:#fff;border-radius:7px;padding:4px 9px;z-index:2}
+  .rvd-rec i{width:7px;height:7px;border-radius:50%;background:var(--red)}
+  .rvd-close{position:absolute;top:12px;inset-inline-end:14px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#fff;background:rgba(255,255,255,.18);z-index:3}
+  .rvd-close:hover{background:rgba(255,255,255,.3)}
+  .rvd-body{flex:1;overflow-y:auto;padding:18px}
+  .rvd-title{font-size:18px;font-weight:700;letter-spacing:-.3px}
+  .rvd-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#157a51;background:var(--green-soft);border-radius:7px;padding:4px 9px;margin-top:10px}
+  .rvd-grid{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+  .rvd-cell{background:var(--surface);padding:12px 13px}
+  .rvd-cell .l{font-size:11px;color:var(--muted);font-weight:600}
+  .rvd-cell .v{font-size:13px;font-weight:600;margin-top:4px}
+  .rvd-sec{font-size:11px;font-weight:700;color:var(--faint);letter-spacing:.5px;margin:18px 2px 9px}
+  .rvd-parts{display:flex;flex-wrap:wrap;gap:7px}
+  .rvd-part{display:flex;align-items:center;gap:7px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:4px 11px 4px 5px;font-size:12px;font-weight:600}
+  .rvd-part .a{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:9px;font-weight:700}
+  .rvd-foot{padding:14px 18px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px}
+  .rvd-playbtn{display:flex;align-items:center;justify-content:center;gap:9px;height:50px;border-radius:14px;background:var(--brand);color:#fff;font-weight:700;font-size:15px;box-shadow:var(--sh-brand);transition:.16s}
+  .rvd-playbtn:hover{background:var(--brand-600);transform:translateY(-1px)}
+  .rvd-dl{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:13px;background:var(--surface);border:1px solid var(--line);color:var(--ink-2);font-weight:600;font-size:13.5px;transition:.15s}
+  .rvd-dl:hover{background:var(--surface-2);border-color:var(--faint);color:var(--ink)}
+  .rvd-note{font-size:11px;color:var(--faint);text-align:center}
+
   svg{display:block}
 </style>
 </head>
@@ -533,7 +645,7 @@
     </div>
 
     <nav class="crumb" aria-label="المسار">
-      <span>شركة أُفُق</span>
+      <span>شركة قمرة السعادة</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <b>الطابق الثاني — التطوير</b>
     </nav>
@@ -587,79 +699,66 @@
 
     <!-- ============ RIGHT SIDEBAR ============ -->
     <aside class="sidebar">
-      <div class="side-scroll">
-
-        <div class="floor-pick" title="تبديل مساحة العمل" style="cursor:pointer" onclick="window.location.href='select-workspace.html'">
-          <div class="ico">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="t"><b>شركة أُفُق</b><span>٣ طوابق • ٤٨ زميلًا متصلًا</span></div>
+      <!-- workspace header -->
+      <div class="ws-head">
+        <div class="ws-top">
+          <button class="ws-co" title="تبديل مساحة العمل" onclick="window.location.href='select-workspace.html'">
+            <span class="t"><b>شركة قمرة السعادة</b><span>مكتب 2026</span></span>
+            <span class="cv"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <button class="ws-invite">دعوة</button>
+          <div class="ws-me">ر<i></i></div>
         </div>
-
-        <div class="nav-h"><span>الطوابق والغرف</span></div>
-
-        <!-- floor 1 -->
-        <button class="floor">
-          <span class="fi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/></svg></span>
-          <span class="ft">الطابق الأول — التصميم</span>
-          <span class="cnt">٦</span>
-        </button>
-
-        <!-- floor 2 (active) -->
-        <button class="floor active">
-          <span class="fi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/></svg></span>
-          <span class="ft">الطابق الثاني — التطوير</span>
-          <span class="cnt">١٢</span>
-        </button>
-        <div class="rooms">
-          <button class="room-i cur">
-            <span class="rdot" style="background:var(--brand)"></span>
-            قاعة الاجتماعات الكبرى
-            <span class="rcap">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-3.3 3.6-6 8-6s8 2.7 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> ٥
-            </span>
-          </button>
-          <button class="room-i">
-            <span class="rdot" style="background:var(--amber)"></span>
-            غرفة التركيز
-            <span class="rcap">١</span>
-          </button>
-          <button class="room-i">
-            <span class="rdot" style="background:var(--green)"></span>
-            منطقة العمل المفتوحة
-            <span class="rcap">٤</span>
-          </button>
-          <button class="room-i">
-            <span class="rdot" style="background:var(--green)"></span>
-            غرفة الفريق
-            <span class="rcap">٢</span>
-          </button>
-          <button class="room-i">
-            <span class="rdot" style="background:var(--faint)"></span>
-            ركن الاستراحة
-            <span class="rcap">٠</span>
-          </button>
-        </div>
-
-        <!-- floor 3 (locked / not permitted) -->
-        <button class="floor locked" title="غير مصرّح لك بدخول هذا الطابق">
-          <span class="fi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/></svg></span>
-          <span class="ft">الطابق الثالث — الإدارة</span>
-          <span class="lk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
-        </button>
-
-        <div class="perm-note">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8h.01M11 12h1v4h1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>تعرض الطوابق والغرف المصرّح لك بدخولها فقط. إدارة الطوابق والخريطة من صلاحيات المشرف.</span>
-        </div>
-
       </div>
 
-      <div class="side-foot">
-        <div class="avatar" style="width:38px;height:38px;font-size:13px">ر</div>
-        <div class="t">
-          <b>ريم الحربي</b>
-          <span><i></i> متاح • مطوّرة واجهات</span>
+      <!-- tabs -->
+      <div class="ws-tabs">
+        <button class="ws-tab active" data-tab>محادثة</button>
+        <button class="ws-tab" data-tab>التقويم</button>
+        <button class="ws-tab" data-tab data-rec>التسجيلات</button>
+        <button class="ws-tab" data-tab>مساعدة</button>
+        <button class="ws-srch" aria-label="بحث"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+
+      <div class="side-scroll">
+        <!-- channels -->
+        <div class="ws-sec">
+          <button class="ws-sec-h"><span class="c0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lbl">القنوات</span><span class="act">⋯</span></button>
+          <div class="ws-list">
+            <button class="ws-ch active"><span class="h">#</span>announcements</button>
+            <button class="ws-ch"><span class="h">#</span>general</button>
+            <button class="ws-add"><span class="p"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>إضافة قناة</button>
+          </div>
+        </div>
+
+        <!-- groups -->
+        <div class="ws-sec">
+          <button class="ws-sec-h"><span class="c0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lbl">المجموعات</span><span class="act">＋</span></button>
+          <div class="ws-list"></div>
+        </div>
+
+        <!-- online -->
+        <div class="ws-sec">
+          <button class="ws-sec-h"><span class="c0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lbl">متصل</span></button>
+          <div class="ws-list">
+            <button class="ws-person"><span class="pa" style="background:linear-gradient(150deg,#4eb38a,#1f7d5c)">ح<i></i></span><span class="nm2">حسام بن مخلوف</span></button>
+          </div>
+        </div>
+
+        <!-- offline -->
+        <div class="ws-sec">
+          <button class="ws-sec-h"><span class="c0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lbl">غير متصل</span></button>
+          <div class="ws-list">
+            <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#7b8cf0,#3b54d6)">أ</span><span class="nm2">أحمد هاشمة</span></button>
+            <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#d8a14e,#b07a1f)">د</span><span class="nm2">داليا</span></button>
+            <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#5bb6c9,#2d8499)">ه</span><span class="nm2">هبة عبيد</span></button>
+            <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#d77fb8,#b14f8d)">م</span><span class="nm2">مريم بكلوتي</span></button>
+            <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#6f7891,#474f66)">م</span><span class="nm2">مروان</span></button>
+            <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#e6845b,#c75a32)">م</span><span class="nm2">مصطفى عبدالمجيد</span></button>
+            <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#5566e6,#2540da)">س</span><span class="nm2">سامي مزغني</span></button>
+            <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#4eb38a,#1f7d5c)">أ</span><span class="nm2">أحمد عبدالرحمن البقلوطي</span></button>
+            <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#8a7bd8,#5e4fb0)">س</span><span class="nm2">سليمة</span></button>
+          </div>
         </div>
       </div>
     </aside>
@@ -815,6 +914,24 @@
           </button>
         </div>
       </div>
+
+      <!-- ====== RECORDINGS VIEW (التسجيلات tab) ====== -->
+      <div class="rec-view" id="recView">
+        <div class="rv-wrap">
+          <div class="rv-head">
+            <div class="rv-hi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.4" fill="currentColor"/></svg></div>
+            <div><h1>التسجيلات المتاحة</h1><p>هنا تظهر التسجيلات التي لديك صلاحية الوصول إليها</p></div>
+          </div>
+          <div class="rv-toolbar">
+            <label class="rv-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input placeholder="ابحث عن تسجيل" /></label>
+            <div class="rv-sel"><span class="cv"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><select><option>الطابق</option><option>الطابق الرئيسي</option><option>طابق المنتج</option><option>طابق الإبداع</option></select></div>
+            <div class="rv-sel"><span class="cv"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><select><option>الغرفة</option><option>غرفة الاجتماعات</option><option>غرفة الفريق</option><option>منطقة التركيز</option></select></div>
+            <div class="rv-sel"><span class="cv"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><select><option>التاريخ</option><option>آخر ٧ أيام</option><option>هذا الشهر</option><option>أقدم</option></select></div>
+          </div>
+          <div class="rv-count">٤ تسجيلات متاحة لك</div>
+          <div id="rvList"></div>
+        </div>
+      </div>
     </main>
 
     <!-- ============ LEFT CONTEXT PANEL ============ -->
@@ -930,6 +1047,41 @@
   <div class="live"><span class="rdot"></span><div class="txt"><b>أنت تشارك شاشتك الآن</b><span>الموجودون في الغرفة يشاهدون شاشتك</span></div></div>
   <button class="ss-stop" id="ssStop"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="11" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 3l18 18M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>إيقاف المشاركة</button>
 </div>
+
+<!-- ===== RECORDING DETAILS (opens from recordings list) ===== -->
+<div class="rv-scrim" id="rvScrim" onclick="closeRec()"></div>
+<aside class="rv-details" id="rvDetails">
+  <div class="rvd-cover" id="rvdCover" style="background:linear-gradient(140deg,#182ca5,#1c35c3)">
+    <button class="rvd-close" onclick="closeRec()" aria-label="إغلاق"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <span class="rvd-rec"><i></i> تسجيل</span>
+    <div class="rvd-play"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+    <span class="rvd-dur" id="rvdDur">٤٥:١٢</span>
+  </div>
+  <div class="rvd-body">
+    <div class="rvd-title" id="rvdTitle">اجتماع مراجعة المنتج الأسبوعي</div>
+    <span class="rvd-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5 9-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>متاح لك</span>
+    <div class="rvd-grid">
+      <div class="rvd-cell"><div class="l">الطابق</div><div class="v" id="rvdFloor">الطابق الرئيسي</div></div>
+      <div class="rvd-cell"><div class="l">الغرفة</div><div class="v" id="rvdRoom">غرفة الاجتماعات</div></div>
+      <div class="rvd-cell"><div class="l">التاريخ والوقت</div><div class="v" id="rvdDate">١٢ يونيو ٢٠٢٦ • ١٠:٠٠ ص</div></div>
+      <div class="rvd-cell"><div class="l">المدة</div><div class="v" id="rvdDur2">٤٥ دقيقة</div></div>
+    </div>
+    <div class="rvd-sec">سجّله</div>
+    <div class="rvd-part"><span class="a" id="rvdByAv" style="background:linear-gradient(150deg,#e6845b,#c75a32)">س</span><span id="rvdBy">سارة القحطاني</span></div>
+    <div class="rvd-sec">المشاركون</div>
+    <div class="rvd-parts">
+      <div class="rvd-part"><span class="a" style="background:linear-gradient(150deg,#7b8cf0,#3b54d6)">ر</span>ريم</div>
+      <div class="rvd-part"><span class="a" style="background:linear-gradient(150deg,#4eb38a,#1f7d5c)">ف</span>فهد</div>
+      <div class="rvd-part"><span class="a" style="background:linear-gradient(150deg,#d8859a,#b14f6d)">ن</span>نورة</div>
+      <div class="rvd-part"><span class="a" style="background:linear-gradient(150deg,#d77fb8,#b14f8d)">ل</span>ليلى</div>
+    </div>
+  </div>
+  <div class="rvd-foot">
+    <button class="rvd-playbtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>تشغيل التسجيل</button>
+    <button class="rvd-dl" id="rvdDl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 4v11M7 11l5 5 5-5M5 20h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>تحميل</button>
+    <div class="rvd-note" id="rvdNote">التحميل متاح لهذا التسجيل وفق صلاحيتك</div>
+  </div>
+</aside>
 
 <!-- ===== COWORKER CARD (opens on avatar click) ===== -->
 <div class="uc-scrim" id="ucScrim"></div>
@@ -1080,12 +1232,12 @@
   const ucScrim=document.getElementById('ucScrim'),ucCard=document.getElementById('ucCard');
   const dcScrim=document.getElementById('dcScrim'),dcPanel=document.getElementById('dcPanel');
 
-  function openCard(seat){
-    const d=readSeat(seat); current=d;
+  function openCardWith(d,rect){
+    current=d;
     const st=STT[d.status];
     document.getElementById('ucAv').style.background=d.bg;
     document.getElementById('ucAv').innerHTML=d.initial+'<span class="d" style="background:'+st.color+'"></span>';
-    document.getElementById('ucName').textContent=d.name+(d.name==='داليا'?' الشهري':'');
+    document.getElementById('ucName').textContent=d.name;
     document.getElementById('ucTitle').textContent=d.title;
     const us=document.getElementById('ucStatus');
     us.style.color=st.color; us.innerHTML='<span class="s" style="background:'+st.color+'"></span>'+st.label;
@@ -1093,20 +1245,21 @@
     const note=document.getElementById('ucNote');
     if(d.status==='focus'){note.classList.add('show');document.getElementById('ucNoteText').textContent=d.name+' في وضع التركيز الآن. يفضل إرسال رسالة بدل المقاطعة.';}
     else note.classList.remove('show');
-    // show, then position near the clicked avatar
+    // show, then position near the clicked anchor
     ucScrim.classList.add('show'); ucCard.classList.add('show');
-    const r=seat.getBoundingClientRect(), cw=300, ch=ucCard.offsetHeight;
-    let left=r.left-cw-14; if(left<14) left=r.right+14; if(left+cw>innerWidth-14) left=innerWidth-cw-14;
-    let top=Math.max(14,Math.min(r.top-22,innerHeight-ch-14));
+    const cw=300, ch=ucCard.offsetHeight;
+    let left=rect.left-cw-14; if(left<14) left=rect.right+14; if(left+cw>innerWidth-14) left=innerWidth-cw-14;
+    let top=Math.max(14,Math.min(rect.top-22,innerHeight-ch-14));
     ucCard.style.left=left+'px'; ucCard.style.top=top+'px';
   }
+  function openCard(seat){ openCardWith(readSeat(seat), seat.getBoundingClientRect()); }
   function closeCard(){ucScrim.classList.remove('show');ucCard.classList.remove('show');}
 
   function openChat(d){
     const st=STT[d.status];
     document.getElementById('dcAv').style.background=d.bg;
     document.getElementById('dcAv').innerHTML=d.initial+'<span class="d" style="background:'+st.color+'"></span>';
-    document.getElementById('dcName').textContent=d.name+(d.name==='داليا'?' الشهري':'');
+    document.getElementById('dcName').textContent=d.name;
     const ds=document.getElementById('dcStatus'); ds.style.color=st.color;
     ds.innerHTML='<i style="background:'+st.color+'"></i>'+st.label;
     document.getElementById('dcLoc').innerHTML='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:-1px"><path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" stroke-width="2"/></svg> في '+d.loc;
@@ -1140,6 +1293,68 @@
   }
   document.getElementById('dcSend').addEventListener('click',dcSend);
   document.getElementById('dcInput').addEventListener('keydown',e=>{if(e.key==='Enter')dcSend();});
+
+  // ===== workspace sidebar: tabs + collapsible sections =====
+  const recView=document.getElementById('recView');
+  document.querySelectorAll('.ws-tab[data-tab]').forEach(t=>t.addEventListener('click',()=>{
+    document.querySelectorAll('.ws-tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    recView.classList.toggle('show', t.hasAttribute('data-rec')); // التسجيلات يفتح الفلو داخل التاب
+  }));
+  document.querySelectorAll('.ws-sec-h').forEach(h=>h.addEventListener('click',e=>{
+    if(e.target.closest('.act')) return; // ⋯ / ＋ are their own actions
+    h.parentElement.classList.toggle('collapsed');
+  }));
+
+  // ===== click a person in the sidebar → open their card → send message =====
+  document.querySelectorAll('.ws-person').forEach(p=>p.addEventListener('click',ev=>{
+    ev.stopPropagation();
+    const pa=p.querySelector('.pa'), online=!p.classList.contains('off');
+    openCardWith({
+      initial:(pa.textContent.trim()[0]||'؟'),
+      name:p.querySelector('.nm2').textContent.trim(),
+      status:online?'av':'busy',
+      bg:pa.style.background||'linear-gradient(150deg,#5566e6,#2540da)',
+      title:'عضو الفريق',
+      loc:online?'في المكتب':'غير متصل الآن'
+    }, p.getBoundingClientRect());
+  }));
+
+  // ===== recordings flow inside the التسجيلات tab =====
+  const recs=[
+    {t:'اجتماع مراجعة المنتج الأسبوعي',floor:'الطابق الرئيسي',room:'غرفة الاجتماعات',date:'١٢ يونيو ٢٠٢٦ • ١٠:٠٠ ص',dur:'٤٥:١٢',dur2:'٤٥ دقيقة',by:'سارة القحطاني',byi:'س',bybg:'linear-gradient(150deg,#e6845b,#c75a32)',cover:'linear-gradient(140deg,#182ca5,#1c35c3)',dl:true},
+    {t:'جلسة تخطيط السبرنت',floor:'الطابق الرئيسي',room:'غرفة الفريق',date:'٨ يونيو ٢٠٢٦ • ١:٠٠ م',dur:'١:١٠:٠٤',dur2:'ساعة و١٠ دقائق',by:'فهد العتيبي',byi:'ف',bybg:'linear-gradient(150deg,#4eb38a,#1f7d5c)',cover:'linear-gradient(140deg,#157a51,#1f9d6b)',dl:true},
+    {t:'عرض تصميم الواجهة الجديدة',floor:'طابق المنتج',room:'غرفة الاجتماعات',date:'٣ يونيو ٢٠٢٦ • ١١:٣٠ ص',dur:'٣٢:٤٨',dur2:'٣٢ دقيقة',by:'نورة الزهراني',byi:'ن',bybg:'linear-gradient(150deg,#d8859a,#b14f6d)',cover:'linear-gradient(140deg,#3b54d6,#7b8cf0)',dl:false},
+    {t:'ورشة بحث تجربة المستخدم',floor:'طابق الإبداع',room:'منطقة التركيز',date:'٢٨ مايو ٢٠٢٦ • ٢:٠٠ م',dur:'٥٥:٢٠',dur2:'٥٥ دقيقة',by:'داليا الشهري',byi:'د',bybg:'linear-gradient(150deg,#d8a14e,#b07a1f)',cover:'linear-gradient(140deg,#9c6510,#c5841a)',dl:true},
+  ];
+  const check='<svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5 9-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  document.getElementById('rvList').innerHTML=recs.map((r,i)=>(
+    '<div class="rv-rec">'+
+      '<div class="rv-thumb" style="background:'+r.cover+'"><span class="pl"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><span class="du">'+r.dur+'</span></div>'+
+      '<div class="rv-info"><div class="rv-ttl">'+r.t+'</div>'+
+        '<div class="rv-meta"><span>'+r.floor+'</span><span class="ds"></span><span>'+r.room+'</span><span class="ds"></span><span>'+r.date.split(' • ')[0]+'</span></div>'+
+        '<div class="rv-by"><span class="a" style="background:'+r.bybg+'">'+r.byi+'</span>سجّله '+r.by+'</div></div>'+
+      '<div class="rv-right"><span class="rv-badge">'+check+'متاح لك</span><button class="rv-open" onclick="openRec('+i+')">عرض</button></div>'+
+    '</div>'
+  )).join('');
+
+  const rvScrim=document.getElementById('rvScrim'),rvDetails=document.getElementById('rvDetails');
+  window.openRec=function(i){
+    const r=recs[i];
+    document.getElementById('rvdCover').style.background=r.cover;
+    document.getElementById('rvdDur').textContent=r.dur;
+    document.getElementById('rvdTitle').textContent=r.t;
+    document.getElementById('rvdFloor').textContent=r.floor;
+    document.getElementById('rvdRoom').textContent=r.room;
+    document.getElementById('rvdDate').textContent=r.date;
+    document.getElementById('rvdDur2').textContent=r.dur2;
+    document.getElementById('rvdBy').textContent=r.by;
+    const a=document.getElementById('rvdByAv');a.textContent=r.byi;a.style.background=r.bybg;
+    document.getElementById('rvdDl').style.display=r.dl?'flex':'none';      // تحميل يظهر فقط إن كان مسموحًا
+    document.getElementById('rvdNote').style.display=r.dl?'block':'none';
+    rvScrim.classList.add('show');rvDetails.classList.add('show');
+  };
+  window.closeRec=function(){rvScrim.classList.remove('show');rvDetails.classList.remove('show');};
 </script>
 </body>
 </html>
