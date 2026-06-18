@@ -1,0 +1,57 @@
+/* ============================================================
+   Maktabi — Design Tokens (the "theme")
+   Anchored on the two real tokens extracted from the Figma file:
+   brand blue #1c35c3  +  IBM Plex Arabic.
+   Everything else is a calm, professional system built around them.
+   ============================================================ */
+:root {
+  /* brand */
+  --brand: #1c35c3;
+  --brand-600: #2540da;
+  --brand-700: #182ca5;
+  --brand-soft: #eceefc;
+  --brand-tint: #f4f5fe;
+
+  /* surfaces */
+  --bg: #eceef4;
+  --surface: #ffffff;
+  --surface-2: #f7f8fc;
+  --surface-3: #f0f2f8;
+
+  /* ink */
+  --ink: #15192b;
+  --ink-2: #3c4259;
+  --muted: #7c8295;
+  --faint: #a7adbf;
+  --line: #e6e8f1;
+  --line-2: #eef0f6;
+
+  /* status */
+  --green: #1f9d6b;   /* متاح */
+  --green-soft: #e6f5ee;
+  --amber: #c5841a;   /* يركز */
+  --amber-soft: #fbf1de;
+  --red: #df524b;     /* غير متاح / تسجيل / مغادرة */
+  --red-soft: #fcebea;
+
+  /* radii */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+
+  /* elevation */
+  --sh-sm: 0 1px 2px rgba(21, 25, 43, 0.05), 0 1px 1px rgba(21, 25, 43, 0.04);
+  --sh-md: 0 4px 16px rgba(21, 25, 43, 0.07), 0 1px 3px rgba(21, 25, 43, 0.05);
+  --sh-lg: 0 18px 50px rgba(21, 25, 43, 0.14), 0 4px 14px rgba(21, 25, 43, 0.08);
+  --sh-brand: 0 12px 30px rgba(28, 53, 195, 0.28);
+
+  /* layout */
+  --topbar-h: 66px;
+  --side-w: 266px;
+  --ctx-w: 332px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* type */
+  --font: 'IBM Plex Sans Arabic', sans-serif;
+}
