@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>مكتبي — مشاركة الشاشة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:#1c35c3; --brand-600:#2540da; --brand-700:#182ca5;
+    --brand-soft:#eceefc; --brand-tint:#f4f5fe;
+    --bg:#eceef4; --surface:#ffffff; --surface-2:#f7f8fc; --surface-3:#f0f2f8;
+    --ink:#15192b; --ink-2:#3c4259; --muted:#7c8295; --faint:#a7adbf;
+    --line:#e6e8f1; --line-2:#eef0f6;
+    --green:#1f9d6b; --green-soft:#e6f5ee;
+    --amber:#c5841a; --amber-soft:#fbf1de;
+    --red:#df524b; --red-soft:#fcebea;
+    --r-md:12px; --r-lg:16px; --r-xl:22px;
+    --sh-sm:0 1px 2px rgba(21,25,43,.05),0 1px 1px rgba(21,25,43,.04);
+    --sh-md:0 4px 16px rgba(21,25,43,.07),0 1px 3px rgba(21,25,43,.05);
+    --sh-lg:0 18px 50px rgba(21,25,43,.14),0 4px 14px rgba(21,25,43,.08);
+    --sh-modal:0 30px 80px rgba(15,18,35,.34),0 8px 24px rgba(15,18,35,.18);
+    --sh-brand:0 12px 30px rgba(28,53,195,.28);
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:'IBM Plex Sans Arabic',sans-serif;background:var(--bg);color:var(--ink);
+    -webkit-font-smoothing:antialiased;overflow:hidden;font-size:14px;line-height:1.5}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  svg{display:block}
+
+  /* ============ OFFICE BACKGROUND ============ */
+  .office{position:fixed;inset:0;
+    background:
+      radial-gradient(1000px 560px at 70% -10%, #fbfcff 0%, transparent 60%),
+      radial-gradient(820px 640px at 8% 120%, var(--brand-tint) 0%, transparent 55%),
+      var(--surface-3)}
+  .office-top{display:flex;align-items:center;padding:16px 24px;font-size:13.5px;color:var(--muted);font-weight:600}
+  .office-top b{color:var(--ink)}
+  .map-frame{position:absolute;inset:64px 24px 24px;border-radius:var(--r-xl);overflow:hidden;
+    background:linear-gradient(0deg,rgba(28,53,195,.02),rgba(28,53,195,.02)),#fcfdff;
+    border:1px solid var(--line);box-shadow:var(--sh-md)}
+  .map-frame::before{content:"";position:absolute;inset:0;
+    background-image:linear-gradient(var(--line-2) 1px,transparent 1px),linear-gradient(90deg,var(--line-2) 1px,transparent 1px);
+    background-size:32px 32px;opacity:.6;mask-image:radial-gradient(120% 120% at 50% 40%,#000 55%,transparent 100%)}
+  .zone{position:absolute;border-radius:16px;border:1.5px solid var(--line);background:rgba(255,255,255,.6)}
+  .zlabel{position:absolute;top:10px;inset-inline-start:12px;font-size:12px;font-weight:700;color:var(--ink-2)}
+
+  /* floating dock (with share button reference) */
+  .dock{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;
+    padding:7px;background:var(--surface);border:1px solid var(--line);border-radius:15px;box-shadow:var(--sh-md)}
+  .dbtn{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:var(--ink-2);transition:.15s;position:relative}
+  .dbtn:hover{background:var(--surface-2)}
+  .dbtn.active{background:var(--green-soft);color:var(--green)}
+  .dbtn.active::after{content:"";position:absolute;top:7px;inset-inline-end:8px;width:7px;height:7px;border-radius:50%;background:var(--green)}
+
+  /* ============ MODAL ============ */
+  .scrim{position:fixed;inset:0;background:rgba(15,18,35,.42);backdrop-filter:blur(2px);z-index:20;
+    display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .25s var(--ease)}
+  .scrim.show{display:flex;opacity:1}
+  .modal{width:412px;max-width:calc(100vw - 40px);background:var(--surface);border-radius:var(--r-xl);
+    box-shadow:var(--sh-modal);overflow:hidden;transform:translateY(14px) scale(.97);opacity:0;transition:.3s var(--ease)}
+  .scrim.show .modal{transform:none;opacity:1}
+
+  .m-top{padding:26px 26px 0;text-align:center}
+  .m-ico{width:66px;height:66px;border-radius:19px;margin:0 auto 16px;display:grid;place-items:center;
+    background:var(--brand-soft);color:var(--brand);position:relative}
+  .m-ico .pulse{position:absolute;inset:0;border-radius:19px;border:2px solid var(--brand);opacity:.4;animation:pulse 1.8s var(--ease) infinite}
+  @keyframes pulse{0%{transform:scale(1);opacity:.4}100%{transform:scale(1.35);opacity:0}}
+  .m-top h2{font-size:20px;font-weight:700;letter-spacing:-.3px}
+  .m-top p{margin-top:9px;color:var(--muted);font-size:14px;line-height:1.7;max-width:300px;margin-inline:auto}
+
+  /* preview hint of what gets shared */
+  .share-hint{margin:18px 26px 0;display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:13px;
+    background:var(--surface-2);border:1px solid var(--line)}
+  .share-hint .sc{width:46px;height:32px;border-radius:7px;background:linear-gradient(135deg,#dfe3f4,#c7cdec);
+    border:1px solid var(--line);position:relative;flex:none}
+  .share-hint .sc::after{content:"";position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);width:16px;height:4px;border-radius:2px;background:var(--faint)}
+  .share-hint .t b{font-size:13px;font-weight:600;display:block}
+  .share-hint .t span{font-size:11.5px;color:var(--muted)}
+
+  .m-actions{padding:22px 26px 24px;display:flex;gap:10px}
+  .btn{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;height:50px;border-radius:14px;
+    font-weight:700;font-size:14.5px;transition:.16s var(--ease)}
+  .btn-primary{background:var(--brand);color:#fff;box-shadow:var(--sh-brand)}
+  .btn-primary:hover{background:var(--brand-600);transform:translateY(-1px)}
+  .btn-ghost{background:var(--surface);border:1px solid var(--line);color:var(--ink-2);flex:0 0 120px}
+  .btn-ghost:hover{background:var(--surface-2);border-color:var(--faint);color:var(--ink)}
+
+  /* not-allowed variant */
+  .modal.blocked .m-ico{background:var(--red-soft);color:var(--red)}
+  .modal.blocked .m-ico .pulse{display:none}
+  .modal.blocked .share-hint{display:none}
+  .modal.blocked .btn-primary{display:none}
+  .modal.blocked .btn-ghost{flex:1}
+
+  /* ============ ACTIVE SHARING BANNER ============ */
+  .share-banner{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:25;
+    display:none;align-items:center;gap:13px;padding:9px 9px 9px 16px;border-radius:14px;
+    background:#11142a;color:#fff;box-shadow:var(--sh-lg);
+    animation:drop .4s var(--ease)}
+  .share-banner.show{display:flex}
+  @keyframes drop{from{transform:translate(-50%,-16px);opacity:0}to{transform:translateX(-50%);opacity:1}}
+  .share-banner .live{display:flex;align-items:center;gap:9px}
+  .share-banner .rdot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(31,157,107,.25);animation:blink 1.4s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+  .share-banner .txt b{font-size:13.5px;font-weight:700;display:block;line-height:1.3}
+  .share-banner .txt span{font-size:11px;color:rgba(255,255,255,.6)}
+  .share-banner .stop{display:flex;align-items:center;gap:7px;height:38px;padding:0 15px;border-radius:11px;
+    background:var(--red);color:#fff;font-size:13px;font-weight:700;transition:.15s}
+  .share-banner .stop:hover{background:#cf463f}
+
+  /* demo switcher */
+  .demo{position:fixed;bottom:18px;inset-inline-end:24px;z-index:40;display:flex;align-items:center;gap:6px;
+    background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px;box-shadow:var(--sh-md)}
+  .demo b{font-size:11px;color:var(--faint);font-weight:600;padding:0 6px}
+  .demo button{font-size:12px;font-weight:600;color:var(--ink-2);padding:7px 12px;border-radius:8px;transition:.14s}
+  .demo button:hover{background:var(--surface-2)}
+  .demo button.on{background:var(--brand);color:#fff}
+</style>
+</head>
+<body>
+
+<!-- ============ OFFICE BACKGROUND ============ -->
+<div class="office">
+  <div class="office-top">قمرة السعادة <span style="color:var(--faint);margin:0 6px">/</span> <b>غرفة الاجتماعات</b></div>
+  <div class="map-frame">
+    <div class="zone" style="top:6%;inset-inline-start:6%;width:40%;height:42%"><div class="zlabel">غرفة الاجتماعات</div></div>
+    <div class="zone" style="top:6%;inset-inline-end:6%;width:39%;height:25%"><div class="zlabel">منطقة التركيز</div></div>
+    <div class="zone" style="bottom:6%;inset-inline-start:6%;width:40%;height:42%"><div class="zlabel">مساحة العمل</div></div>
+    <div class="zone" style="bottom:6%;inset-inline-end:6%;width:39%;height:25%"><div class="zlabel">منطقة الاستراحة</div></div>
+
+    <div class="dock">
+      <div class="dbtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="2"/><path d="M6 11a6 6 0 0012 0M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="dbtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 10l5-3v10l-5-3" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+      <div class="dbtn" id="dockShare"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M12 8v5M9.5 10.5L12 8l2.5 2.5M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ACTIVE SHARING BANNER ============ -->
+<div class="share-banner" id="banner">
+  <div class="live">
+    <span class="rdot"></span>
+    <div class="txt"><b>أنت تشارك شاشتك الآن</b><span>الموجودون في غرفة الاجتماعات يشاهدون شاشتك</span></div>
+  </div>
+  <button class="stop" id="stopShare">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="11" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 3l18 18M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    إيقاف المشاركة
+  </button>
+</div>
+
+<!-- ============ MODAL ============ -->
+<div class="scrim show" id="scrim">
+  <div class="modal" id="modal">
+    <div class="m-top">
+      <div class="m-ico" id="mIco">
+        <span class="pulse"></span>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M12 8v5M9.5 10.5L12 8l2.5 2.5M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 id="mTitle">مشاركة الشاشة</h2>
+      <p id="mMsg">سيتم مشاركة شاشتك مع الموجودين في الغرفة.</p>
+    </div>
+
+    <div class="share-hint">
+      <span class="sc"></span>
+      <div class="t"><b>سيُشارَك: الشاشة الكاملة</b><span>يمكنك إيقاف المشاركة في أي وقت</span></div>
+    </div>
+
+    <div class="m-actions">
+      <button class="btn btn-ghost" id="cancelBtn">إلغاء</button>
+      <button class="btn btn-primary" id="startBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 4h18v12H3z" stroke="currentColor" stroke-width="2"/><path d="M8 20h8M12 16v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        بدء المشاركة
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- demo switcher (review only) -->
+<div class="demo">
+  <b>الحالة:</b>
+  <button class="on" data-state="confirm">طلب المشاركة</button>
+  <button data-state="active">المشاركة نشطة</button>
+  <button data-state="blocked">غير متاحة</button>
+</div>
+
+<script>
+  const scrim=document.getElementById('scrim');
+  const modal=document.getElementById('modal');
+  const banner=document.getElementById('banner');
+  const mTitle=document.getElementById('mTitle');
+  const mMsg=document.getElementById('mMsg');
+  const cancelBtn=document.getElementById('cancelBtn');
+
+  function setState(s){
+    scrim.classList.remove('show'); banner.classList.remove('show'); modal.classList.remove('blocked');
+    if(s==='confirm'){
+      modal.classList.remove('blocked');
+      mTitle.textContent='مشاركة الشاشة';
+      mMsg.textContent='سيتم مشاركة شاشتك مع الموجودين في الغرفة.';
+      cancelBtn.textContent='إلغاء';
+      scrim.classList.add('show');
+    }else if(s==='active'){
+      banner.classList.add('show');
+    }else if(s==='blocked'){
+      modal.classList.add('blocked');
+      mTitle.textContent='مشاركة الشاشة غير متاحة';
+      mMsg.textContent='مشاركة الشاشة غير متاحة في هذه الغرفة.';
+      cancelBtn.textContent='حسنًا';
+      scrim.classList.add('show');
+    }
+    document.querySelectorAll('.demo button').forEach(b=>b.classList.toggle('on',b.dataset.state===s));
+  }
+  document.querySelectorAll('.demo button').forEach(b=>b.addEventListener('click',()=>setState(b.dataset.state)));
+
+  // flow wiring
+  document.getElementById('startBtn').addEventListener('click',()=>setState('active'));
+  document.getElementById('cancelBtn').addEventListener('click',()=>scrim.classList.remove('show'));
+  document.getElementById('stopShare').addEventListener('click',()=>banner.classList.remove('show'));
+  document.getElementById('dockShare').addEventListener('click',()=>setState('confirm'));
+  scrim.addEventListener('click',e=>{if(e.target===scrim)scrim.classList.remove('show')});
+</script>
+</body>
+</html>
