@@ -1,0 +1,41 @@
+name: نشر مكتبي إلى GitHub Pages
+
+# يعمل تلقائيًا عند كل تعديل (push) على الفرع، أو يدويًا من تبويب Actions
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: جلب الملفات
+        uses: actions/checkout@v4
+
+      - name: تجهيز موقع الفلو
+        run: |
+          mkdir -p _site
+          cp login.html select-workspace.html device-check.html employee-office.html _site/
+          printf '%s' '<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="refresh" content="0; url=login.html"><title>مكتبي — المكتب الافتراضي</title><style>html,body{height:100%;margin:0;font-family:sans-serif;background:#182ca5;color:#fff;display:grid;place-items:center}a{color:#fff}</style></head><body><script>location.replace("login.html")</script><a href="login.html">ادخل إلى مكتبي…</a></body></html>' > _site/index.html
+
+      - name: رفع ملفات الموقع
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: النشر إلى Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
