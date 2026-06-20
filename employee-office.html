@@ -242,25 +242,26 @@
   .mtool{width:36px;height:36px;border-radius:10px;background:var(--surface);border:1px solid var(--line);
     display:grid;place-items:center;color:var(--ink-2);box-shadow:var(--sh-sm);transition:.15s}
   .mtool:hover{border-color:var(--faint);color:var(--ink)}
+  .furnish-btn{display:flex;align-items:center;gap:7px;height:36px;padding:0 14px;border-radius:10px;
+    background:var(--brand);color:#fff;font-size:12.5px;font-weight:700;box-shadow:var(--sh-brand);transition:.15s var(--ease);margin-inline-end:6px}
+  .furnish-btn:hover{background:var(--brand-600);transform:translateY(-1px)}
+  .furnish-btn svg{width:16px;height:16px}
 
   .map-frame{flex:1;position:relative;margin:10px 22px 22px;border-radius:var(--r-xl);overflow:hidden;
-    background:
-      linear-gradient(0deg, rgba(122,46,192,.022), rgba(122,46,192,.022)),
-      #fcfdff;
+    background:linear-gradient(160deg,#f4f1ea,#ebe6db);
     border:1px solid var(--line);box-shadow:var(--sh-md);min-height:0}
-  /* blueprint grid */
-  .map-frame::before{content:"";position:absolute;inset:0;
-    background-image:linear-gradient(var(--line-2) 1px,transparent 1px),linear-gradient(90deg,var(--line-2) 1px,transparent 1px);
-    background-size:34px 34px;opacity:.6;mask-image:radial-gradient(120% 120% at 50% 40%,#000 55%,transparent 100%)}
+  /* soft overhead lighting on the plain floor */
+  .map-frame::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+    background:radial-gradient(120% 90% at 50% 25%, rgba(255,255,255,.45), transparent 62%)}
 
-  .map{position:absolute;inset:0}
+  .map{position:absolute;inset:0;z-index:2}
 
-  /* room zones */
-  .zone{position:absolute;border-radius:16px;border:1.5px solid var(--line);
-    background:rgba(255,255,255,.66);backdrop-filter:blur(2px);
+  /* room zones — clean light cards on the plain floor */
+  .zone{position:absolute;border-radius:14px;border:1.5px solid var(--line);
+    background:rgba(255,255,255,.74);backdrop-filter:blur(2px);
     box-shadow:var(--sh-sm);transition:.25s var(--ease);overflow:hidden;
     opacity:0;animation:rise .6s var(--ease) forwards}
-  .zone:hover{border-color:#c9cee6;box-shadow:var(--sh-md);transform:translateY(-2px)}
+  .zone:hover{border-color:#cdd2e6;box-shadow:var(--sh-md);transform:translateY(-2px)}
   .zone .zhead{position:absolute;top:11px;inset-inline-start:13px;display:flex;align-items:center;gap:7px;z-index:3}
   .zone .zhead .zi{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;color:#fff;font-size:13px}
   .zone .zhead b{font-size:12.5px;font-weight:700;color:var(--ink)}
@@ -271,7 +272,7 @@
     box-shadow:0 0 0 4px var(--brand-soft),var(--sh-md)}
   .zone.active-room .zcap{color:#b23a34;background:var(--red-soft);border-color:transparent}
 
-  /* furniture hints */
+  /* furniture hints — clean and neutral */
   .desk{position:absolute;border-radius:6px;background:var(--surface-3);border:1px solid var(--line)}
   .plant{position:absolute;width:14px;height:14px;border-radius:50%;
     background:radial-gradient(circle at 35% 30%,#5bbd8f,#2f8a5f);box-shadow:0 0 0 4px rgba(47,138,95,.1)}
@@ -316,24 +317,23 @@
   @keyframes pop{from{opacity:0;transform:translate(50%,-50%) scale(.8)}to{opacity:1;transform:translate(50%,-50%) scale(1)}}
 
   /* ============ MEDIA DOCK (floating, bottom center) ============ */
-  .dock{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:30;
-    display:flex;align-items:center;gap:8px;padding:11px;background:rgba(21,25,43,.94);
-    backdrop-filter:blur(12px);border-radius:22px;box-shadow:var(--sh-lg),0 0 0 1px rgba(255,255,255,.05) inset;
+  /* light meeting bar — icon + label, like the reference */
+  .dock{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:30;
+    display:flex;align-items:stretch;gap:2px;padding:7px 9px;background:var(--surface);
+    border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh-lg);
     animation:rise .6s var(--ease) .3s both}
-  .dock .dgrp{display:flex;align-items:center;gap:8px;padding:0 4px}
-  .dock .sep{width:1px;height:36px;background:rgba(255,255,255,.14)}
-  .dbtn{width:56px;height:56px;border-radius:17px;display:grid;place-items:center;color:#dfe2f0;
-    position:relative;transition:.16s var(--ease)}
-  .dbtn svg{width:24px;height:24px}
-  .dbtn:hover{background:rgba(255,255,255,.12);color:#fff}
-  .dbtn:active{transform:scale(.94)}
-  .dbtn.on{background:rgba(255,255,255,.16);color:#fff}
-  .dbtn.off{background:var(--red);color:#fff;box-shadow:0 6px 16px rgba(223,82,75,.4)}
-  .dbtn .tip{position:absolute;bottom:66px;left:50%;transform:translateX(-50%);white-space:nowrap;
-    background:#000;color:#fff;font-size:12px;font-weight:500;padding:4px 10px;border-radius:8px;opacity:0;pointer-events:none;transition:.15s}
-  .dbtn:hover .tip{opacity:.95}
-  .dbtn .min{position:absolute;top:6px;inset-inline-end:7px;font-size:9px;font-weight:700;color:#fff;
-    background:var(--red);border-radius:5px;padding:0 4px;line-height:14px}
+  .dock .sep{width:1px;align-self:stretch;margin:7px 7px;background:var(--line)}
+  .dctl{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    min-width:64px;padding:8px 8px 6px;border-radius:12px;color:var(--ink-2);position:relative;transition:.14s var(--ease)}
+  .dctl:hover{background:var(--surface-2)}
+  .dctl:active{transform:scale(.96)}
+  .dctl svg{width:24px;height:24px}
+  .dctl .lbl{font-size:11px;font-weight:600;color:var(--ink-2);line-height:1}
+  .dctl.off{color:var(--red)} .dctl.off .lbl{color:var(--red)}
+  .dctl.on{color:var(--brand)} .dctl.on .lbl{color:var(--brand)}
+  .dctl.sharing{color:var(--green)} .dctl.sharing .lbl{color:var(--green)}
+  .dctl .chev{position:absolute;top:5px;inset-inline-end:7px;color:var(--faint)}
+  .dctl .chev svg{width:11px;height:11px}
   /* leave as its own pill, sitting at the corner so the controls stay centered */
   .leave-pill{position:absolute;bottom:30px;left:30px;z-index:30;display:flex;align-items:center;gap:9px;
     height:56px;padding:0 24px;background:var(--red);color:#fff;border-radius:18px;font-weight:700;font-size:14.5px;
@@ -805,6 +805,10 @@
         </div>
         <div class="live-pill"><i></i> ١٢ متصلًا الآن</div>
         <div class="map-tools">
+          <button class="furnish-btn" title="تجهيز مكتبك — متاح وفق صلاحيتك" onclick="window.location.href='customize.html'">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            تجهيز المكتب
+          </button>
           <button class="mtool" aria-label="تكبير"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
           <button class="mtool" aria-label="تصغير"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
           <button class="mtool" aria-label="توسيط على موقعي"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
@@ -913,33 +917,37 @@
 
         </div>
 
-        <!-- ====== FLOATING MEDIA DOCK ====== -->
-        <div class="dock" role="toolbar" aria-label="أدوات الصوت والفيديو">
-          <div class="dgrp">
-            <button class="dbtn on" id="micBtn" aria-label="الميكروفون">
-              <span class="tip">كتم الميكروفون</span>
-              <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="2"/><path d="M6 11a6 6 0 0012 0M12 17v4M9 21h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </button>
-            <button class="dbtn on" id="camBtn" aria-label="الكاميرا">
-              <span class="tip">إيقاف الكاميرا</span>
-              <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 10l5-3v10l-5-3" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-            </button>
-          </div>
-          <div class="sep"></div>
-          <div class="dgrp">
-            <button class="dbtn" id="shareBtn" aria-label="مشاركة الشاشة">
-              <span class="tip">مشاركة الشاشة</span>
-              <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M12 8v5M9.5 10.5L12 8l2.5 2.5M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <button class="dbtn" id="handBtn" aria-label="رفع اليد">
-              <span class="tip">رفع اليد</span>
-              <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M8 11V5.5a1.5 1.5 0 013 0V11m0-1V4.5a1.5 1.5 0 013 0V11m0-.5V6a1.5 1.5 0 013 0v7a6 6 0 01-6 6h-1.2a4 4 0 01-3-1.4L5 14a1.6 1.6 0 012.4-2L8 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <button class="dbtn" id="chatBtn" aria-label="المحادثة">
-              <span class="tip">المحادثة</span>
-              <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H9l-4 3v-3H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-            </button>
-          </div>
+        <!-- ====== FLOATING MEETING BAR (light) ====== -->
+        <div class="dock" role="toolbar" aria-label="أدوات الاجتماع">
+          <button class="dctl off" id="camBtn" aria-label="الكاميرا">
+            <span class="chev"><svg viewBox="0 0 24 24" fill="none"><path d="M6 15l6-6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M3 3l18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 10l5-3v10M16 14V8a2 2 0 00-2-2H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="lbl">الكاميرا</span>
+          </button>
+          <button class="dctl off" id="micBtn" aria-label="الميكروفون">
+            <span class="chev"><svg viewBox="0 0 24 24" fill="none"><path d="M6 15l6-6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M9 9v2a3 3 0 004.5 2.6M15 11V6a3 3 0 00-5.8-1M6 11a6 6 0 009 5.2M12 19v2M4 4l16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="lbl">الميكروفون</span>
+          </button>
+
+          <span class="sep"></span>
+
+          <button class="dctl" id="dockStatus" aria-label="الحالة" style="color:var(--green)">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M5 20c0-3.3 3-6 7-6s7 2.7 7 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span class="lbl" id="dockStatusLabel">متاح</span>
+          </button>
+          <button class="dctl" id="shareBtn" aria-label="مشاركة الشاشة">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M12 8v5M9.5 10.5L12 8l2.5 2.5M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="lbl">مشاركة</span>
+          </button>
+          <button class="dctl" id="handBtn" aria-label="رفع اليد">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M8 11V5.5a1.5 1.5 0 013 0V11m0-1V4.5a1.5 1.5 0 013 0V11m0-.5V6a1.5 1.5 0 013 0v7a6 6 0 01-6 6h-1.2a4 4 0 01-3-1.4L5 14a1.6 1.6 0 012.4-2L8 12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="lbl">رفع اليد</span>
+          </button>
+          <button class="dctl" id="chatBtn" aria-label="المحادثة">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H9l-4 3v-3H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            <span class="lbl">المحادثة</span>
+          </button>
         </div>
         <button class="leave-pill" aria-label="مغادرة الغرفة">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M14 4h4a2 2 0 012 2v12a2 2 0 01-2 2h-4M10 8l-4 4 4 4M6 12h11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1206,23 +1214,28 @@
       it.classList.add('active');
       document.getElementById('curLabel').textContent=it.dataset.label;
       document.getElementById('curPip').className='pip '+it.dataset.pip;
+      const dsl=document.getElementById('dockStatusLabel');
+      if(dsl){ dsl.textContent=it.dataset.label;
+        document.getElementById('dockStatus').style.color=it.dataset.status==='busy'?'var(--red)':it.dataset.status==='focus'?'var(--amber)':'var(--green)'; }
       wrap.classList.remove('open');
     });
   });
 
-  // mic / cam / share toggles
-  function toggle(id,onClass){const b=document.getElementById(id);b.addEventListener('click',()=>{
-    b.classList.toggle('on');b.classList.toggle('off');
-  });}
-  const mic=document.getElementById('micBtn');
-  mic.addEventListener('click',()=>{mic.classList.toggle('on');mic.classList.toggle('off');
-    mic.querySelector('.tip').textContent=mic.classList.contains('off')?'تشغيل الميكروفون':'كتم الميكروفون';});
-  const cam=document.getElementById('camBtn');
-  cam.addEventListener('click',()=>{cam.classList.toggle('on');cam.classList.toggle('off');
-    cam.querySelector('.tip').textContent=cam.classList.contains('off')?'تشغيل الكاميرا':'إيقاف الكاميرا';});
-  ['handBtn','chatBtn'].forEach(id=>{
-    const b=document.getElementById(id);b.addEventListener('click',()=>b.classList.toggle('on'));
-  });
+  // mic / cam toggles — off = red, matching the reference bar
+  const ICO={
+    micOn:'<rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="2"/><path d="M6 11a6 6 0 0012 0M12 17v4M9 21h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+    micOff:'<path d="M9 9v2a3 3 0 004.5 2.6M15 11V6a3 3 0 00-5.8-1M6 11a6 6 0 009 5.2M12 19v2M4 4l16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+    camOn:'<rect x="3" y="6" width="13" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 10l5-3v10l-5-3" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>',
+    camOff:'<path d="M3 3l18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 10l5-3v10M16 14V8a2 2 0 00-2-2H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+  };
+  function bindAV(id,onI,offI){
+    const b=document.getElementById(id), ic=b.querySelector('.ic');
+    b.addEventListener('click',()=>{ const off=b.classList.toggle('off'); ic.innerHTML=off?offI:onI; });
+  }
+  bindAV('micBtn',ICO.micOn,ICO.micOff);
+  bindAV('camBtn',ICO.camOn,ICO.camOff);
+  document.getElementById('handBtn').addEventListener('click',()=>document.getElementById('handBtn').classList.toggle('on'));
+  document.getElementById('dockStatus').addEventListener('click',e=>{ e.stopPropagation(); document.getElementById('statusBtn').click(); });
 
   // screen sharing: click share button → confirmation modal → active banner
   const ssScrim=document.getElementById('ssScrim');

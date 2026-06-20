@@ -28,7 +28,7 @@ jobs:
       - name: تجهيز موقع الفلو
         run: |
           mkdir -p _site
-          cp login.html select-workspace.html device-check.html employee-office.html screen-share.html _site/
+          cp login.html select-workspace.html device-check.html employee-office.html screen-share.html customize.html _site/
           printf '%s' '<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="refresh" content="0; url=login.html"><title>مكتبي — المكتب الافتراضي</title><style>html,body{height:100%;margin:0;font-family:sans-serif;background:#182ca5;color:#fff;display:grid;place-items:center}a{color:#fff}</style></head><body><script>location.replace("login.html")</script><a href="login.html">ادخل إلى مكتبي…</a></body></html>' > _site/index.html
 
       - name: رفع ملفات الموقع
