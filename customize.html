@@ -128,6 +128,16 @@
     display:flex;flex-direction:column;gap:5px;padding:12px 13px}
   .room-lock b{font-size:12px;font-weight:700;color:var(--muted)}
   .room-lock .lk{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;color:var(--faint)}
+
+  /* drag & drop */
+  .item .thumb{cursor:grab;touch-action:none}
+  .item .thumb:active{cursor:grabbing}
+  .piece{cursor:grab;touch-action:none}
+  .piece:active{cursor:grabbing}
+  .drag-clone{position:fixed;z-index:999;pointer-events:none;transform:translate(-50%,-50%);opacity:.9;
+    filter:drop-shadow(0 8px 14px rgba(60,45,20,.28))}
+  .my-room.drop-active{background:linear-gradient(180deg,rgba(122,46,192,.14),rgba(255,255,255,.45));
+    box-shadow:0 0 0 3px var(--brand),0 0 0 8px var(--brand-soft)}
 </style>
 </head>
 <body>
@@ -162,10 +172,7 @@
       <div class="piece" style="bottom:13%;inset-inline-start:16%">
         <svg width="34" height="44" viewBox="0 0 34 44"><ellipse cx="17" cy="16" rx="15" ry="13" fill="#2f8a5f"/><ellipse cx="17" cy="13" rx="12" ry="10" fill="#54b487"/><path d="M11 28h12l-2 12h-8z" fill="#b97a4f"/></svg>
       </div>
-      <div class="ghost" style="top:18%;inset-inline-end:14%">
-        <svg width="56" height="56" viewBox="0 0 60 60"><circle cx="30" cy="32" r="22" fill="#d9b43a"/><circle cx="30" cy="28" r="22" fill="#e8c64a"/></svg>
-      </div>
-      <div class="drop-hint" style="top:6%;inset-inline-end:10%">اسحب داخل مكتبك ثم أفلت للتثبيت</div>
+      <div class="drop-hint" style="top:6%;inset-inline-end:10%">اسحب قطعة من القائمة وأفلتها هنا</div>
     </div>
   </div>
 </div>
@@ -338,6 +345,56 @@
     });
     fe.style.display=(q&&!any)?'block':'none';
   });
+
+  // ===== drag & drop furniture into «مكتبي» only =====
+  const myRoom=document.querySelector('.my-room');
+  let drag=null;
+  const overRoom=(x,y)=>{const r=myRoom.getBoundingClientRect();return x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom;};
+
+  function placedSvg(item){
+    const svg=item.querySelector('.thumb svg').cloneNode(true);
+    const w=parseFloat(svg.getAttribute('width'))*1.5, h=parseFloat(svg.getAttribute('height'))*1.5;
+    svg.setAttribute('width',w); svg.setAttribute('height',h);
+    return svg;
+  }
+  function place(piece,x,y){
+    const r=myRoom.getBoundingClientRect();
+    piece.style.cssText='position:absolute;left:'+((x-r.left)/r.width*100)+'%;top:'+((y-r.top)/r.height*100)+
+      '%;transform:translate(-50%,-50%);visibility:visible;cursor:grab;touch-action:none';
+  }
+  function newPiece(svg){
+    const p=document.createElement('div'); p.className='piece placed'; p.appendChild(svg);
+    myRoom.appendChild(p); makeMovable(p); return p;
+  }
+  function beginDrag(svg, ev, source){
+    const clone=document.createElement('div'); clone.className='drag-clone'; clone.appendChild(svg);
+    document.body.appendChild(clone); drag={clone, source};
+    if(source) source.style.visibility='hidden';
+    onMove(ev);
+    window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp);
+    ev.preventDefault();
+  }
+  function onMove(e){ if(!drag) return; drag.clone.style.left=e.clientX+'px'; drag.clone.style.top=e.clientY+'px';
+    myRoom.classList.toggle('drop-active', overRoom(e.clientX,e.clientY)); }
+  function onUp(e){
+    window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp);
+    myRoom.classList.remove('drop-active');
+    if(overRoom(e.clientX,e.clientY)){
+      const piece=drag.source || newPiece(drag.clone.firstChild.cloneNode(true));
+      place(piece,e.clientX,e.clientY);
+    } else if(drag.source){ drag.source.remove(); }
+    drag.clone.remove(); drag=null;
+  }
+  function makeMovable(p){ p.addEventListener('pointerdown',e=>{ e.stopPropagation(); beginDrag(p.firstChild.cloneNode(true), e, p); }); }
+
+  // grab a thumbnail from the catalog → drag onto the room
+  document.querySelectorAll('.item').forEach(item=>{
+    item.querySelector('.thumb').addEventListener('pointerdown',e=>beginDrag(placedSvg(item), e, null));
+    item.querySelector('.add').addEventListener('click',e=>{ e.stopPropagation();
+      const r=myRoom.getBoundingClientRect(); place(newPiece(placedSvg(item)), r.left+r.width/2, r.top+r.height/2); });
+  });
+  // pieces already in the room are movable / removable
+  document.querySelectorAll('.my-room .piece').forEach(makeMovable);
 </script>
 </body>
 </html>
