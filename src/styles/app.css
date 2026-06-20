@@ -92,7 +92,7 @@ svg { display: block; }
 .smenu-item.active { background: var(--brand-tint); }
 
 /* ---- avatars ---- */
-.avatar { border-radius: 50%; display: grid; place-items: center; font-weight: 600; color: #fff; flex: none; background: linear-gradient(150deg, #ab68e0, #9a50db); position: relative; }
+.avatar { border-radius: 50%; display: grid; place-items: center; font-weight: 600; color: #fff; flex: none; background: linear-gradient(150deg, #a05fd2, #8c46d0); position: relative; }
 .me-avatar { width: 40px; height: 40px; font-size: 14px; box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--brand); }
 
 /* ---- right sidebar ---- */
@@ -156,7 +156,7 @@ svg { display: block; }
 
 .map-frame {
   flex: 1; position: relative; margin: 10px 22px 22px; border-radius: var(--r-xl); overflow: hidden;
-  background: linear-gradient(0deg, rgba(140, 56, 214, 0.022), rgba(140, 56, 214, 0.022)), #fcfdff;
+  background: linear-gradient(0deg, rgba(122, 46, 192, 0.022), rgba(122, 46, 192, 0.022)), #fcfdff;
   border: 1px solid var(--line); box-shadow: var(--sh-md); min-height: 0;
 }
 .map-frame::before {
@@ -173,7 +173,7 @@ svg { display: block; }
 .zone .zhead .zi { width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; color: #fff; font-size: 13px; }
 .zone .zhead b { font-size: 12.5px; font-weight: 700; color: var(--ink); }
 .zone .zcap { position: absolute; top: 13px; inset-inline-end: 13px; font-size: 10.5px; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); border-radius: 7px; padding: 2px 7px; font-weight: 600; display: flex; gap: 4px; align-items: center; }
-.zone.active-room { border-color: var(--brand); background: linear-gradient(180deg, rgba(140, 56, 214, 0.06), rgba(255, 255, 255, 0.7)); box-shadow: 0 0 0 4px var(--brand-soft), var(--sh-md); }
+.zone.active-room { border-color: var(--brand); background: linear-gradient(180deg, rgba(122, 46, 192, 0.06), rgba(255, 255, 255, 0.7)); box-shadow: 0 0 0 4px var(--brand-soft), var(--sh-md); }
 .zone.active-room .zcap { color: #b23a34; background: var(--red-soft); border-color: transparent; }
 .zcap .blip { width: 6px; height: 6px; border-radius: 50%; background: var(--red); display: inline-block; }
 
@@ -196,10 +196,10 @@ svg { display: block; }
 .seat .speak { position: absolute; inset: -4px; border-radius: 50%; border: 2.5px solid var(--green); animation: speak 1.3s infinite; }
 @keyframes speak { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.5); opacity: 0; } }
 
-.seat.me .av { background: linear-gradient(150deg, #ab68e0, var(--brand-700)); border-color: #fff; box-shadow: 0 0 0 3px var(--brand), var(--sh-lg); width: 42px; height: 42px; }
+.seat.me .av { background: linear-gradient(150deg, #a05fd2, var(--brand-700)); border-color: #fff; box-shadow: 0 0 0 3px var(--brand), var(--sh-lg); width: 42px; height: 42px; }
 .seat.me .tag { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; background: var(--brand); color: #fff; font-size: 10.5px; font-weight: 700; padding: 3px 9px; border-radius: 7px; box-shadow: var(--sh-brand); }
 .seat.me .tag::after { content: ""; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 8px; height: 8px; background: var(--brand); }
-.move-hint { position: absolute; inset: -12px; border-radius: 50%; border: 2px dashed rgba(140, 56, 214, 0.4); animation: spin 14s linear infinite; }
+.move-hint { position: absolute; inset: -12px; border-radius: 50%; border: 2px dashed rgba(122, 46, 192, 0.4); animation: spin 14s linear infinite; }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }

@@ -10,11 +10,11 @@
 <style>
   /* ============ DESIGN TOKENS (anchored on Figma brand) ============ */
   :root{
-    --brand:#8c38d6;          /* Figma brand blue */
-    --brand-600:#9a50db;
-    --brand-700:#732eaf;
-    --brand-soft:#f2e8fb;
-    --brand-tint:#f9f4fe;
+    --brand:#7a2ec0;          /* Figma brand blue */
+    --brand-600:#8c46d0;
+    --brand-700:#612596;
+    --brand-soft:#f1e8fa;
+    --brand-tint:#f8f3fd;
 
     --bg:#eceef4;
     --surface:#ffffff;
@@ -39,7 +39,7 @@
     --sh-sm:0 1px 2px rgba(21,25,43,.05), 0 1px 1px rgba(21,25,43,.04);
     --sh-md:0 4px 16px rgba(21,25,43,.07), 0 1px 3px rgba(21,25,43,.05);
     --sh-lg:0 18px 50px rgba(21,25,43,.14), 0 4px 14px rgba(21,25,43,.08);
-    --sh-brand:0 12px 30px rgba(140,56,214,.28);
+    --sh-brand:0 12px 30px rgba(122,46,192,.28);
 
     --topbar-h:66px;
     --side-w:266px;
@@ -155,7 +155,7 @@
   .smenu-item.active{background:var(--brand-tint)}
 
   .avatar{border-radius:50%;display:grid;place-items:center;font-weight:600;color:#fff;flex:none;
-    background:linear-gradient(150deg,#ab68e0,#9a50db);position:relative}
+    background:linear-gradient(150deg,#a05fd2,#8c46d0);position:relative}
   .me-avatar{width:40px;height:40px;font-size:14px;box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--brand)}
 
   /* ============ RIGHT SIDEBAR ============ */
@@ -243,7 +243,7 @@
 
   .map-frame{flex:1;position:relative;margin:10px 22px 22px;border-radius:var(--r-xl);overflow:hidden;
     background:
-      linear-gradient(0deg, rgba(140,56,214,.022), rgba(140,56,214,.022)),
+      linear-gradient(0deg, rgba(122,46,192,.022), rgba(122,46,192,.022)),
       #fcfdff;
     border:1px solid var(--line);box-shadow:var(--sh-md);min-height:0}
   /* blueprint grid */
@@ -265,7 +265,7 @@
   .zone .zcap{position:absolute;top:13px;inset-inline-end:13px;font-size:10.5px;color:var(--muted);
     background:var(--surface-2);border:1px solid var(--line);border-radius:7px;padding:2px 7px;font-weight:600;display:flex;gap:4px;align-items:center}
 
-  .zone.active-room{border-color:var(--brand);background:linear-gradient(180deg,rgba(140,56,214,.06),rgba(255,255,255,.7));
+  .zone.active-room{border-color:var(--brand);background:linear-gradient(180deg,rgba(122,46,192,.06),rgba(255,255,255,.7));
     box-shadow:0 0 0 4px var(--brand-soft),var(--sh-md)}
   .zone.active-room .zcap{color:#b23a34;background:var(--red-soft);border-color:transparent}
 
@@ -300,13 +300,13 @@
   @keyframes speak{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.5);opacity:0}}
 
   /* the employee (you) */
-  .seat.me .av{background:linear-gradient(150deg,#ab68e0,var(--brand-700));border-color:#fff;
+  .seat.me .av{background:linear-gradient(150deg,#a05fd2,var(--brand-700));border-color:#fff;
     box-shadow:0 0 0 3px var(--brand),var(--sh-lg);width:42px;height:42px}
   .seat.me .tag{position:absolute;top:-30px;left:50%;transform:translateX(-50%);white-space:nowrap;
     background:var(--brand);color:#fff;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:7px;box-shadow:var(--sh-brand)}
   .seat.me .tag::after{content:"";position:absolute;bottom:-4px;left:50%;transform:translateX(-50%) rotate(45deg);
     width:8px;height:8px;background:var(--brand)}
-  .move-hint{position:absolute;inset:-12px;border-radius:50%;border:2px dashed rgba(140,56,214,.4);
+  .move-hint{position:absolute;inset:-12px;border-radius:50%;border:2px dashed rgba(122,46,192,.4);
     animation:spin 14s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -530,7 +530,7 @@
   .ws-co .cv{color:var(--muted);flex:none}
   .ws-invite{height:31px;padding:0 13px;border-radius:9px;background:var(--green);color:#fff;font-weight:700;font-size:12.5px;box-shadow:0 6px 16px rgba(31,157,107,.26);transition:.15s;flex:none}
   .ws-invite:hover{background:#1b8d60}
-  .ws-me{width:33px;height:33px;border-radius:50%;flex:none;position:relative;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;background:linear-gradient(150deg,#ab68e0,#9a50db)}
+  .ws-me{width:33px;height:33px;border-radius:50%;flex:none;position:relative;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;background:linear-gradient(150deg,#a05fd2,#8c46d0)}
   .ws-me i{position:absolute;bottom:-1px;inset-inline-end:-1px;width:11px;height:11px;border-radius:50%;background:var(--green);border:2.5px solid var(--surface)}
 
   .ws-tabs{display:flex;align-items:center;gap:2px;padding:8px 9px;border-bottom:1px solid var(--line)}
@@ -755,7 +755,7 @@
             <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#d77fb8,#b14f8d)">م</span><span class="nm2">مريم بكلوتي</span></button>
             <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#6f7891,#474f66)">م</span><span class="nm2">مروان</span></button>
             <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#e6845b,#c75a32)">م</span><span class="nm2">مصطفى عبدالمجيد</span></button>
-            <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#ab68e0,#9a50db)">س</span><span class="nm2">سامي مزغني</span></button>
+            <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#a05fd2,#8c46d0)">س</span><span class="nm2">سامي مزغني</span></button>
             <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#4eb38a,#1f7d5c)">أ</span><span class="nm2">أحمد عبدالرحمن البقلوطي</span></button>
             <button class="ws-person off"><span class="pa" style="background:linear-gradient(150deg,#8a7bd8,#5e4fb0)">س</span><span class="nm2">سليمة</span></button>
           </div>
@@ -1051,7 +1051,7 @@
 <!-- ===== RECORDING DETAILS (opens from recordings list) ===== -->
 <div class="rv-scrim" id="rvScrim" onclick="closeRec()"></div>
 <aside class="rv-details" id="rvDetails">
-  <div class="rvd-cover" id="rvdCover" style="background:linear-gradient(140deg,#732eaf,#8c38d6)">
+  <div class="rvd-cover" id="rvdCover" style="background:linear-gradient(140deg,#612596,#7a2ec0)">
     <button class="rvd-close" onclick="closeRec()" aria-label="إغلاق"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     <span class="rvd-rec"><i></i> تسجيل</span>
     <div class="rvd-play"><svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
@@ -1224,7 +1224,7 @@
     const raw=(seat.querySelector('.nm')?.textContent||'').trim();
     const name=raw.split('—')[0].trim()||'زميل';
     const status=seat.classList.contains('busy')?'busy':seat.classList.contains('focus')?'focus':'av';
-    const bg=av.style.background||'linear-gradient(150deg,#ab68e0,#9a50db)';
+    const bg=av.style.background||'linear-gradient(150deg,#a05fd2,#8c46d0)';
     const info=people[name]||{title:'زميل',loc:'المكتب'};
     return {initial,name,status,bg,title:info.title,loc:info.loc};
   }
@@ -1314,7 +1314,7 @@
       initial:(pa.textContent.trim()[0]||'؟'),
       name:p.querySelector('.nm2').textContent.trim(),
       status:online?'av':'busy',
-      bg:pa.style.background||'linear-gradient(150deg,#ab68e0,#9a50db)',
+      bg:pa.style.background||'linear-gradient(150deg,#a05fd2,#8c46d0)',
       title:'عضو الفريق',
       loc:online?'في المكتب':'غير متصل الآن'
     }, p.getBoundingClientRect());
@@ -1322,7 +1322,7 @@
 
   // ===== recordings flow inside the التسجيلات tab =====
   const recs=[
-    {t:'اجتماع مراجعة المنتج الأسبوعي',floor:'الطابق الرئيسي',room:'غرفة الاجتماعات',date:'١٢ يونيو ٢٠٢٦ • ١٠:٠٠ ص',dur:'٤٥:١٢',dur2:'٤٥ دقيقة',by:'سارة القحطاني',byi:'س',bybg:'linear-gradient(150deg,#e6845b,#c75a32)',cover:'linear-gradient(140deg,#732eaf,#8c38d6)',dl:true},
+    {t:'اجتماع مراجعة المنتج الأسبوعي',floor:'الطابق الرئيسي',room:'غرفة الاجتماعات',date:'١٢ يونيو ٢٠٢٦ • ١٠:٠٠ ص',dur:'٤٥:١٢',dur2:'٤٥ دقيقة',by:'سارة القحطاني',byi:'س',bybg:'linear-gradient(150deg,#e6845b,#c75a32)',cover:'linear-gradient(140deg,#612596,#7a2ec0)',dl:true},
     {t:'جلسة تخطيط السبرنت',floor:'الطابق الرئيسي',room:'غرفة الفريق',date:'٨ يونيو ٢٠٢٦ • ١:٠٠ م',dur:'١:١٠:٠٤',dur2:'ساعة و١٠ دقائق',by:'فهد العتيبي',byi:'ف',bybg:'linear-gradient(150deg,#4eb38a,#1f7d5c)',cover:'linear-gradient(140deg,#157a51,#1f9d6b)',dl:true},
     {t:'عرض تصميم الواجهة الجديدة',floor:'طابق المنتج',room:'غرفة الاجتماعات',date:'٣ يونيو ٢٠٢٦ • ١١:٣٠ ص',dur:'٣٢:٤٨',dur2:'٣٢ دقيقة',by:'نورة الزهراني',byi:'ن',bybg:'linear-gradient(150deg,#d8859a,#b14f6d)',cover:'linear-gradient(140deg,#3b54d6,#7b8cf0)',dl:false},
     {t:'ورشة بحث تجربة المستخدم',floor:'طابق الإبداع',room:'منطقة التركيز',date:'٢٨ مايو ٢٠٢٦ • ٢:٠٠ م',dur:'٥٥:٢٠',dur2:'٥٥ دقيقة',by:'داليا الشهري',byi:'د',bybg:'linear-gradient(150deg,#d8a14e,#b07a1f)',cover:'linear-gradient(140deg,#9c6510,#c5841a)',dl:true},
