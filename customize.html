@@ -118,6 +118,16 @@
   .rtmpl .ri{width:46px;height:46px;border-radius:11px;display:grid;place-items:center;color:#fff;flex:none}
   .rtmpl .t b{display:block;font-size:13.5px;font-weight:700}
   .rtmpl .t span{font-size:11.5px;color:var(--muted)}
+
+  /* scope: only the employee's own room is editable */
+  .my-room{position:absolute;border:2px solid var(--brand);border-radius:16px;
+    background:linear-gradient(180deg,rgba(122,46,192,.05),rgba(255,255,255,.3));box-shadow:0 0 0 5px var(--brand-soft)}
+  .mr-tag{position:absolute;top:-13px;inset-inline-start:16px;display:flex;align-items:center;gap:6px;
+    background:var(--brand);color:#fff;font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:8px;box-shadow:var(--sh-brand)}
+  .room-lock{position:absolute;border:1.5px dashed #cfc6b4;border-radius:13px;background:rgba(120,100,70,.04);
+    display:flex;flex-direction:column;gap:5px;padding:12px 13px}
+  .room-lock b{font-size:12px;font-weight:700;color:var(--muted)}
+  .room-lock .lk{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;color:var(--faint)}
 </style>
 </head>
 <body>
@@ -125,25 +135,38 @@
 <!-- ============ OFFICE (plain floor + a few placed pieces) ============ -->
 <div class="office">
   <div class="office-top">
-    قمرة السعادة <span style="color:var(--faint);margin:0 6px">/</span> <b>مكتبي الخاص</b>
-    <span class="mode"><i></i> وضع التجهيز</span>
+    قمرة السعادة <span style="color:var(--faint);margin:0 6px">/</span> الطابق الرئيسي <span style="color:var(--faint);margin:0 6px">/</span> <b>مكتبي</b>
+    <span class="mode"><i></i> وضع تجهيز مكتبي</span>
   </div>
   <div class="floor">
-    <!-- already-placed furniture (demo) -->
-    <div class="piece sel" style="top:30%;inset-inline-start:22%">
-      <svg width="120" height="64" viewBox="0 0 120 64"><rect x="6" y="14" width="108" height="40" rx="11" fill="#8a5a3c"/><rect x="6" y="6" width="108" height="20" rx="9" fill="#a06e49"/><rect x="14" y="20" width="44" height="28" rx="7" fill="#b98a64"/><rect x="62" y="20" width="44" height="28" rx="7" fill="#b98a64"/></svg>
+    <!-- neighbouring rooms — managed by admin, NOT editable by the employee -->
+    <div class="room-lock" style="top:7%;inset-inline-end:5%;width:33%;height:40%">
+      <b>قاعة الاجتماعات</b>
+      <span class="lk"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg> تديره الإدارة</span>
     </div>
-    <div class="piece" style="top:58%;inset-inline-end:26%">
-      <svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="34" r="20" fill="#3a4a72"/><circle cx="30" cy="30" r="20" fill="#4a5d8c"/></svg>
+    <div class="room-lock" style="bottom:7%;inset-inline-end:5%;width:33%;height:42%">
+      <b>غرفة الفريق</b>
+      <span class="lk"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg> تديره الإدارة</span>
     </div>
-    <div class="piece" style="bottom:14%;inset-inline-start:30%">
-      <svg width="34" height="44" viewBox="0 0 34 44"><ellipse cx="17" cy="16" rx="15" ry="13" fill="#2f8a5f"/><ellipse cx="17" cy="13" rx="12" ry="10" fill="#54b487"/><path d="M11 28h12l-2 12h-8z" fill="#b97a4f"/></svg>
+
+    <!-- MY room — the only area the employee can furnish -->
+    <div class="my-room" style="top:9%;inset-inline-start:6%;width:52%;height:80%">
+      <div class="mr-tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#fff" stroke-width="2"/><path d="M5 20c0-3.3 3-6 7-6s7 2.7 7 6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg> مكتبي — القابل للتجهيز</div>
+
+      <div class="piece sel" style="top:22%;inset-inline-start:12%">
+        <svg width="110" height="60" viewBox="0 0 120 64"><rect x="6" y="14" width="108" height="40" rx="11" fill="#8a5a3c"/><rect x="6" y="6" width="108" height="20" rx="9" fill="#a06e49"/><rect x="14" y="20" width="44" height="28" rx="7" fill="#b98a64"/><rect x="62" y="20" width="44" height="28" rx="7" fill="#b98a64"/></svg>
+      </div>
+      <div class="piece" style="bottom:18%;inset-inline-end:16%">
+        <svg width="56" height="56" viewBox="0 0 60 60"><circle cx="30" cy="34" r="20" fill="#3a4a72"/><circle cx="30" cy="30" r="20" fill="#4a5d8c"/></svg>
+      </div>
+      <div class="piece" style="bottom:13%;inset-inline-start:16%">
+        <svg width="34" height="44" viewBox="0 0 34 44"><ellipse cx="17" cy="16" rx="15" ry="13" fill="#2f8a5f"/><ellipse cx="17" cy="13" rx="12" ry="10" fill="#54b487"/><path d="M11 28h12l-2 12h-8z" fill="#b97a4f"/></svg>
+      </div>
+      <div class="ghost" style="top:18%;inset-inline-end:14%">
+        <svg width="56" height="56" viewBox="0 0 60 60"><circle cx="30" cy="32" r="22" fill="#d9b43a"/><circle cx="30" cy="28" r="22" fill="#e8c64a"/></svg>
+      </div>
+      <div class="drop-hint" style="top:6%;inset-inline-end:10%">اسحب داخل مكتبك ثم أفلت للتثبيت</div>
     </div>
-    <!-- a piece being placed -->
-    <div class="ghost" style="top:24%;inset-inline-end:30%">
-      <svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="32" r="22" fill="#d9b43a"/><circle cx="30" cy="28" r="22" fill="#e8c64a"/></svg>
-    </div>
-    <div class="drop-hint" style="top:14%;inset-inline-end:24%">اسحب لمكانه ثم أفلت للتثبيت</div>
   </div>
 </div>
 
@@ -157,7 +180,7 @@
     </div>
     <div class="perm">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5 9-9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      وضع التجهيز مُفعّل — متاح وفق صلاحيتك
+      تُجهّز أثاث <b style="margin:0 3px">مكتبك فقط</b> — باقي الغرف يديرها المشرف
     </div>
     <div class="tabs">
       <button class="tab active" data-tab="furn">الأثاث</button>
