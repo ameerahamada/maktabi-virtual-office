@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --brand:#8b2fd9; --brand-600:#9b44e6; --brand-700:#6f1fb8; --brand-800:#561a96;
-    --brand-soft:#f1e7fc; --brand-tint:#f8f3fe;
+    --brand:#8c38d6; --brand-600:#9a50db; --brand-700:#732eaf; --brand-800:#5f2691;
+    --brand-soft:#f2e8fb; --brand-tint:#f9f4fe;
     --bg:#eceef4; --surface:#ffffff; --surface-2:#f7f8fc; --surface-3:#f0f2f8;
     --ink:#15192b; --ink-2:#3c4259; --muted:#7c8295; --faint:#a7adbf;
     --line:#e6e8f1; --line-2:#eef0f6;
@@ -18,7 +18,7 @@
     --r-md:12px; --r-lg:16px; --r-xl:22px;
     --sh-sm:0 1px 2px rgba(21,25,43,.05),0 1px 1px rgba(21,25,43,.04);
     --sh-md:0 4px 16px rgba(21,25,43,.07),0 1px 3px rgba(21,25,43,.05);
-    --sh-brand:0 12px 30px rgba(139,47,217,.28);
+    --sh-brand:0 12px 30px rgba(140,56,214,.28);
     --ease:cubic-bezier(.22,.61,.36,1);
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -36,8 +36,8 @@
   .brand-panel{
     flex:0 0 46%;position:relative;overflow:hidden;color:#fff;
     background:
-      radial-gradient(900px 500px at 80% -10%, #9a44ea 0%, transparent 55%),
-      radial-gradient(800px 700px at 10% 120%, #7d28cf 0%, transparent 50%),
+      radial-gradient(900px 500px at 80% -10%, #9d52de 0%, transparent 55%),
+      radial-gradient(800px 700px at 10% 120%, #732eaf 0%, transparent 50%),
       linear-gradient(150deg, var(--brand-700), var(--brand-800));
     display:flex;flex-direction:column;padding:48px 56px;
   }
@@ -48,7 +48,7 @@
     background-size:40px 40px;mask-image:radial-gradient(120% 100% at 70% 30%,#000 40%,transparent 100%)}
   /* glow orbs */
   .orb{position:absolute;border-radius:50%;filter:blur(48px);opacity:.5}
-  .orb.a{width:340px;height:340px;background:#a45ef0;top:-60px;inset-inline-end:-40px;opacity:.45}
+  .orb.a{width:340px;height:340px;background:#ab68e0;top:-60px;inset-inline-end:-40px;opacity:.45}
   .orb.b{width:300px;height:300px;background:#7b5be0;bottom:-80px;inset-inline-start:-60px;opacity:.35}
 
   .bp-top{display:flex;align-items:center;gap:13px;position:relative;z-index:2}
@@ -114,7 +114,7 @@
   .btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;height:52px;
     background:var(--brand);color:#fff;border-radius:14px;font-weight:700;font-size:15px;
     box-shadow:var(--sh-brand);transition:.18s var(--ease)}
-  .btn:hover{background:var(--brand-600);transform:translateY(-1px);box-shadow:0 16px 36px rgba(139,47,217,.34)}
+  .btn:hover{background:var(--brand-600);transform:translateY(-1px);box-shadow:0 16px 36px rgba(140,56,214,.34)}
   .btn:active{transform:translateY(0)}
 
   .divider{display:flex;align-items:center;gap:14px;margin:24px 0;color:var(--faint);font-size:12px}
