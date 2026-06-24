@@ -135,7 +135,7 @@
   .pip.s-focus{background:var(--amber);color:var(--amber)}
 
   .status-menu{
-    position:absolute;top:48px;inset-inline-start:0;width:248px;
+    position:absolute;top:48px;inset-inline-end:0;width:248px;max-width:calc(100vw - 24px);
     background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
     box-shadow:var(--sh-lg);padding:7px;z-index:60;
     opacity:0;transform:translateY(-8px) scale(.98);pointer-events:none;
@@ -468,7 +468,7 @@
     padding:8px 11px;border-radius:4px 12px 12px 12px;display:inline-block}
   .msg.mine .mb p{background:var(--brand);color:#fff;border-radius:12px 4px 12px 12px}
 
-  .chat-foot{padding:12px 14px;border-top:1px solid var(--line);display:flex;align-items:center;gap:8px}
+  .chat-foot{padding:12px 14px 14px 20px;border-top:1px solid var(--line);display:flex;align-items:center;gap:8px}
   .chat-foot .box{flex:1;min-width:0;display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;background:var(--surface-2);
     border:1px solid var(--line);border-radius:12px;transition:.18s}
   .chat-foot .box:focus-within{background:#fff;border-color:var(--brand);box-shadow:0 0 0 4px var(--brand-soft)}
@@ -591,7 +591,7 @@
   .dc-m.out{align-self:flex-end;align-items:flex-end}
   .dc-m.out .who{color:var(--brand)}
   .dc-m.out .bub{background:var(--brand);color:#fff;border-radius:15px 4px 15px 15px}
-  .dc-foot{padding:12px 14px;border-top:1px solid var(--line);display:flex;align-items:center;gap:9px}
+  .dc-foot{padding:12px 14px 14px 20px;border-top:1px solid var(--line);display:flex;align-items:center;gap:9px}
   .dc-box{flex:1;display:flex;align-items:center;gap:9px;height:46px;padding:0 13px;background:var(--surface-2);border:1px solid var(--line);border-radius:13px;transition:.18s}
   .dc-box:focus-within{background:#fff;border-color:var(--brand);box-shadow:0 0 0 4px var(--brand-soft)}
   .dc-box input{flex:1;border:none;background:none;outline:none;font-family:inherit;font-size:13.5px;color:var(--ink)}
