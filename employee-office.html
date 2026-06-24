@@ -337,6 +337,78 @@
   .dctl .chev svg{width:11px;height:11px}
   .dctl.rec-on{color:var(--red)} .dctl.rec-on .lbl{color:var(--red)}
   .dctl.rec-on svg{animation:blink 1.3s infinite}
+  .dctl.ai-on{color:var(--brand)} .dctl.ai-on .lbl{color:var(--brand)}
+
+  /* ===== AI meeting assistant (robot) ===== */
+  .ai-bot{position:absolute;transform:translate(-50%,-50%);z-index:6;cursor:grab;touch-action:none;
+    display:flex;flex-direction:column;align-items:center;gap:5px}
+  .ai-bot:active{cursor:grabbing}
+  .ai-bot .bot{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;color:#fff;position:relative;
+    background:linear-gradient(150deg,#9a50db,#612596);border:2.5px solid #fff;box-shadow:0 6px 16px rgba(122,46,192,.4)}
+  .ai-bot .bot .pulse{position:absolute;inset:-5px;border-radius:16px;border:2px solid var(--brand);animation:aipulse 1.9s var(--ease) infinite}
+  @keyframes aipulse{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.32);opacity:0}}
+  .ai-bot.working .bot{animation:botbob 1.4s var(--ease) infinite}
+  @keyframes botbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .ai-bot .tag{font-size:10.5px;font-weight:700;color:var(--brand);background:#fff;border:1px solid var(--brand-soft);
+    border-radius:7px;padding:2px 8px;box-shadow:var(--sh-sm);white-space:nowrap}
+  .ai-bot .recdot{position:absolute;top:-4px;inset-inline-end:-4px;width:13px;height:13px;border-radius:50%;background:var(--red);border:2px solid #fff;display:none;z-index:2}
+  .ai-bot.working .recdot{display:block;animation:blink 1.3s infinite}
+
+  .ai-scrim{position:fixed;inset:0;background:rgba(15,18,35,.28);backdrop-filter:blur(1.5px);z-index:74;display:none}
+  .ai-scrim.show{display:block}
+  .ai-panel{position:fixed;top:0;inset-inline-start:0;height:100vh;width:360px;background:var(--surface);box-shadow:var(--sh-panel);z-index:75;
+    display:none;flex-direction:column}
+  .ai-panel.show{display:flex;animation:aislide .4s var(--ease)}
+  @keyframes aislide{from{transform:translateX(-26px);opacity:0}to{transform:none;opacity:1}}
+  .ai-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:11px}
+  .ai-head .ai-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;flex:none;background:linear-gradient(150deg,#9a50db,#612596)}
+  .ai-head .t{flex:1;min-width:0}
+  .ai-head .t b{display:block;font-size:15px;font-weight:700}
+  .ai-head .t span{font-size:11.5px;color:var(--muted)}
+  .ai-head .x{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:var(--muted)}
+  .ai-head .x:hover{background:var(--surface-2);color:var(--ink)}
+  .ai-status{display:flex;align-items:center;gap:9px;margin:12px 14px 0;padding:9px 12px;border-radius:11px;background:var(--red-soft);color:#b23a34;font-size:12.5px;font-weight:700}
+  .ai-status .rd{width:9px;height:9px;border-radius:50%;background:var(--red);animation:blink 1.3s infinite}
+  .ai-status time{margin-inline-start:auto;font-weight:600;color:#b8554f;font-size:11.5px}
+  .ai-mode{display:flex;gap:6px;margin:12px 14px 0;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:4px}
+  .ai-mode button{flex:1;height:32px;border-radius:8px;font-size:12.5px;font-weight:700;color:var(--muted)}
+  .ai-mode button.on{background:var(--surface);color:var(--brand);box-shadow:var(--sh-sm)}
+  .ai-body{flex:1;overflow-y:auto;padding:8px 14px 14px}
+  .ai-body::-webkit-scrollbar{width:8px}.ai-body::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px;border:2px solid var(--surface)}
+  .ai-sec{font-size:11px;font-weight:700;color:var(--faint);letter-spacing:.4px;margin:12px 4px 8px}
+  .ai-pt{display:flex;gap:9px;align-items:flex-start;padding:9px 11px;margin-bottom:8px;border:1px solid var(--line);border-radius:11px;background:var(--surface-2);
+    opacity:0;transform:translateY(6px);animation:ptin .4s var(--ease) forwards}
+  @keyframes ptin{to{opacity:1;transform:none}}
+  .ai-pt .dot{width:19px;height:19px;border-radius:6px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;flex:none;font-size:11px;font-weight:700}
+  .ai-pt p{font-size:13px;color:var(--ink-2);line-height:1.6}
+  .ai-typing{display:flex;gap:5px;align-items:center;padding:8px 11px;color:var(--muted);font-size:12px}
+  .ai-typing i{width:6px;height:6px;border-radius:50%;background:var(--brand);animation:tdot 1s infinite}
+  .ai-typing i:nth-child(2){animation-delay:.2s} .ai-typing i:nth-child(3){animation-delay:.4s}
+  @keyframes tdot{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+  .ai-foot{padding:12px 14px;border-top:1px solid var(--line);display:flex;gap:9px}
+  .ai-foot button{flex:1;height:44px;border-radius:12px;font-weight:700;font-size:13.5px;display:flex;align-items:center;justify-content:center;gap:8px}
+  .ai-stop{background:var(--surface);border:1px solid var(--line);color:var(--ink-2)}
+  .ai-stop:hover{background:var(--surface-2)}
+  .ai-save{background:var(--brand);color:#fff;box-shadow:var(--sh-brand)}
+  .ai-save:hover{background:var(--brand-600)}
+  /* tabbed notes / summary / transcript */
+  .ai-tabs{display:flex;gap:2px;padding:10px 12px 0;border-bottom:1px solid var(--line)}
+  .ai-tab{padding:8px 9px;font-size:12.5px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;transition:.14s}
+  .ai-tab:hover{color:var(--ink-2)}
+  .ai-tab.on{color:var(--brand);border-color:var(--brand)}
+  .ai-pane{display:none} .ai-pane.show{display:block}
+  .ai-nh{font-size:12.5px;font-weight:700;color:var(--ink);margin:15px 4px 9px;display:flex;align-items:center;gap:8px}
+  .ai-nh .ic{width:22px;height:22px;border-radius:7px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;flex:none}
+  .ai-summary{font-size:13.5px;line-height:1.9;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+  .ai-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+  .ai-chip{font-size:11.5px;font-weight:600;color:var(--brand);background:var(--brand-soft);border-radius:999px;padding:5px 11px}
+  .ai-tr{display:flex;gap:9px;margin-bottom:13px}
+  .ai-tr .av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:11px;font-weight:700;flex:none}
+  .ai-tr .b{flex:1;min-width:0}
+  .ai-tr .b .top{display:flex;align-items:baseline;gap:7px}
+  .ai-tr .b .top b{font-size:12.5px;font-weight:700}
+  .ai-tr .b .top time{font-size:10.5px;color:var(--faint)}
+  .ai-tr .b p{font-size:13px;color:var(--ink-2);line-height:1.6;margin-top:2px}
 
   /* ============ LEFT CONTEXT PANEL ============ */
   .context{flex:0 0 var(--ctx-w);width:var(--ctx-w);background:var(--surface);
@@ -886,6 +958,15 @@
             <span class="tag">أنت</span>
           </div>
 
+          <!-- AI meeting assistant (drag to move • click to start) -->
+          <div class="ai-bot" id="aiBot" style="left:62%;top:72%" title="مساعد مكتبي — اسحبه لمكانه، واضغط لبدء التلخيص">
+            <span class="recdot"></span>
+            <div class="bot"><span class="pulse"></span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="3.5" r="1.5" fill="#fff"/><path d="M12 5v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/><rect x="4" y="8" width="16" height="11" rx="3.5" stroke="#fff" stroke-width="2"/><path d="M9 13h.01M15 13h.01" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M10 16.5h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <span class="tag">مساعد مكتبي</span>
+          </div>
+
           <!-- focus room -->
           <div class="seat focus" style="top:18%;inset-inline-end:18%;animation-delay:.5s">
             <div class="av" style="background:linear-gradient(150deg,#d8a14e,#b07a1f)">خ</div>
@@ -948,6 +1029,10 @@
           <button class="dctl" id="chatBtn" aria-label="المحادثة">
             <svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H9l-4 3v-3H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
             <span class="lbl">المحادثة</span>
+          </button>
+          <button class="dctl" id="aiBtn" aria-label="مساعد الذكاء الاصطناعي" title="مساعد مكتبي — تلخيص الاجتماع">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="3.5" r="1.4" fill="currentColor"/><path d="M12 5v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="4" y="8" width="16" height="11" rx="3.5" stroke="currentColor" stroke-width="2"/><path d="M9 13h.01M15 13h.01" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M10 16.5h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span class="lbl">مساعد AI</span>
           </button>
         </div>
       </div>
@@ -1084,6 +1169,44 @@
   <div class="live"><span class="rdot"></span><div class="txt"><b>أنت تشارك شاشتك الآن</b><span>الموجودون في الغرفة يشاهدون شاشتك</span></div></div>
   <button class="ss-stop" id="ssStop"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="11" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 3l18 18M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>إيقاف المشاركة</button>
 </div>
+
+<!-- ===== AI ASSISTANT PANEL (live meeting summary) ===== -->
+<div class="ai-scrim" id="aiScrim"></div>
+<aside class="ai-panel" id="aiPanel">
+  <div class="ai-head">
+    <div class="ai-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="3.5" r="1.4" fill="#fff"/><path d="M12 5v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/><rect x="4" y="8" width="16" height="11" rx="3.5" stroke="#fff" stroke-width="2"/><path d="M9 13h.01M15 13h.01" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M10 16.5h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <div class="t"><b>مساعد مكتبي</b><span>تلخيص الاجتماع بالذكاء الاصطناعي</span></div>
+    <button class="x" id="aiClose" aria-label="إغلاق"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </div>
+  <div class="ai-status" id="aiStatus"><span class="rd"></span> جارٍ تسجيل وتلخيص الاجتماع <time id="aiTimer">00:00</time></div>
+  <div class="ai-mode" id="aiMode">
+    <button class="on" data-mode="auto">تلقائي</button>
+    <button data-mode="manual">يدوي</button>
+  </div>
+  <div class="ai-tabs">
+    <button class="ai-tab on" data-pane="notes">ملاحظات</button>
+    <button class="ai-tab" data-pane="sum">ملخّص</button>
+    <button class="ai-tab" data-pane="tr">النسخة المكتوبة</button>
+  </div>
+  <div class="ai-body">
+    <div class="ai-pane show" id="pane-notes">
+      <div id="aiNotes"></div>
+    </div>
+    <div class="ai-pane" id="pane-sum">
+      <div class="ai-sec">ملخّص تنفيذي</div>
+      <p class="ai-summary">ركّز الاجتماع على مراجعة موضوعات المحتوى واعتماد تصنيف موحّد للمواد ضمن ثلاث مجموعات، مع توحيد دليل الإعداد والقوالب. اتُّفق على أداة واحدة لتنظيم المهام، وحُدِّدت مهام بمسؤولين ومواعيد لإنهاء التصنيف ورفع النسخة المعتمدة.</p>
+      <div class="ai-chips"><span class="ai-chip">تصنيف المحتوى</span><span class="ai-chip">توحيد القوالب</span><span class="ai-chip">إدارة المهام</span><span class="ai-chip">مواعيد التسليم</span></div>
+    </div>
+    <div class="ai-pane" id="pane-tr">
+      <div class="ai-sec">النسخة المكتوبة للاجتماع</div>
+      <div id="aiTr"></div>
+    </div>
+  </div>
+  <div class="ai-foot">
+    <button class="ai-stop" id="aiStopBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg>إيقاف</button>
+    <button class="ai-save" id="aiSaveBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5 9-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>حفظ الملخّص</button>
+  </div>
+</aside>
 
 <!-- ===== FILTER POPOVER (by team / status) ===== -->
 <div class="filter-pop" id="filterPop">
@@ -1236,7 +1359,91 @@
   document.getElementById('recBtn').addEventListener('click',()=>{
     const b=document.getElementById('recBtn'); const on=b.classList.toggle('rec-on');
     b.querySelector('.lbl').textContent=on?'إيقاف':'تسجيل';
+    if(on && aiMode==='auto') aiStart();      // التسجيل يشغّل المساعد تلقائيًا
+    else if(!on) aiStop();
   });
+
+  // ===== AI meeting assistant (robot): drag to move, click to summarize =====
+  const aiBot=document.getElementById('aiBot'), aiBtn=document.getElementById('aiBtn');
+  const aiPanel=document.getElementById('aiPanel'), aiScrim=document.getElementById('aiScrim');
+  const mapEl=document.querySelector('.map');
+  let aiMode='auto', aiActive=false, aiTimer=null, aiTick=null, aiSec=0, aiStep=0;
+  // structured meeting notes (heading + bullets), built progressively
+  const NOTES=[
+    {h:'محاور النقاش', items:['مراجعة موضوعات المحتوى وخطّة العمل للأسبوع.','تصنيف المواد إلى ثلاث مجموعات رئيسية.']},
+    {h:'القرارات', items:['اعتماد أداة موحّدة لتنظيم المهام والمتابعة.','توحيد دليل الإعداد والقوالب لكل مجموعة.']},
+    {h:'المهام والمسؤوليات', items:['مراجعة العرض النهائي قبل الخميس — فهد.','رفع النسخة المكتبية المعتمدة — ريم.']},
+  ];
+  const NOTE_SEQ=[]; NOTES.forEach(s=>{ NOTE_SEQ.push({t:'h',x:s.h}); s.items.forEach(it=>NOTE_SEQ.push({t:'i',x:it})); });
+  const TRANSCRIPT=[
+    {who:'سارة القحطاني',i:'س',bg:'linear-gradient(150deg,#e6845b,#c75a32)',time:'١٢:٤١',m:'أهلًا بالجميع، نبدأ بمراجعة موضوعات المحتوى.'},
+    {who:'فهد العتيبي',i:'ف',bg:'linear-gradient(150deg,#4eb38a,#1f7d5c)',time:'١٢:٤٢',m:'جاهز، عندي ملاحظات على طريقة التصنيف الحالية.'},
+    {who:'أنت',i:'ر',bg:'linear-gradient(150deg,#a05fd2,#612596)',time:'١٢:٤٣',m:'تمام، نوحّد القوالب أولًا ثم نوزّع المواد على المجموعات.'},
+    {who:'نورة الزهراني',i:'ن',bg:'linear-gradient(150deg,#d8859a,#b14f6d)',time:'١٢:٤٥',m:'أقترح اعتماد أداة واحدة للمهام حتى ما تتفرّق المتابعة.'},
+    {who:'سارة القحطاني',i:'س',bg:'linear-gradient(150deg,#e6845b,#c75a32)',time:'١٢:٤٧',m:'موافقة. نخلّص التصنيف ونرفع النسخة المعتمدة قبل الخميس.'},
+  ];
+  function aiShow(){ aiScrim.classList.add('show'); aiPanel.classList.add('show'); }
+  function aiHide(){ aiScrim.classList.remove('show'); aiPanel.classList.remove('show'); }
+  function fmt(s){ return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
+  function fillTr(){ document.getElementById('aiTr').innerHTML=TRANSCRIPT.map(x=>
+    '<div class="ai-tr"><div class="av" style="background:'+x.bg+'">'+x.i+'</div><div class="b"><div class="top"><b>'+x.who+'</b><time>'+x.time+'</time></div><p>'+x.m+'</p></div></div>').join(''); }
+  function aiStart(){
+    aiShow();
+    if(aiActive) return;
+    aiActive=true; aiBot.classList.add('working'); aiBtn.classList.add('ai-on');
+    const r0=document.getElementById('recBtn'); r0.classList.add('rec-on'); r0.querySelector('.lbl').textContent='إيقاف';
+    aiSec=0; document.getElementById('aiTimer').textContent='00:00';
+    aiTimer=setInterval(()=>{aiSec++;document.getElementById('aiTimer').textContent=fmt(aiSec);},1000);
+    fillTr();
+    document.getElementById('aiNotes').innerHTML=''; aiStep=0; addNote();
+  }
+  function addNote(){
+    const body=document.getElementById('aiNotes'); const ty=body.querySelector('.ai-typing'); if(ty) ty.remove();
+    if(aiStep<NOTE_SEQ.length){
+      const it=NOTE_SEQ[aiStep];
+      if(it.t==='h'){ const h=document.createElement('div'); h.className='ai-nh'; h.innerHTML='<span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 6h14M5 12h14M5 18h9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>'+it.x; body.appendChild(h); }
+      else { const p=document.createElement('div'); p.className='ai-pt'; p.innerHTML='<span class="dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5 9-9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p>'+it.x+'</p>'; body.appendChild(p); }
+      aiStep++;
+    }
+    if(aiStep<NOTE_SEQ.length){
+      const t=document.createElement('div'); t.className='ai-typing'; t.innerHTML='<i></i><i></i><i></i> يلخّص…'; body.appendChild(t);
+      aiTick=setTimeout(addNote, NOTE_SEQ[aiStep].t==='h'?900:1300);
+    }
+    body.scrollTop=body.scrollHeight;
+  }
+  document.querySelectorAll('.ai-tab').forEach(t=>t.addEventListener('click',()=>{
+    document.querySelectorAll('.ai-tab').forEach(x=>x.classList.remove('on')); t.classList.add('on');
+    document.querySelectorAll('.ai-pane').forEach(p=>p.classList.remove('show'));
+    document.getElementById('pane-'+t.dataset.pane).classList.add('show');
+  }));
+  function aiStop(){
+    aiActive=false; aiBot.classList.remove('working'); aiBtn.classList.remove('ai-on');
+    clearInterval(aiTimer); clearTimeout(aiTick);
+    const r=document.getElementById('recBtn'); r.classList.remove('rec-on'); r.querySelector('.lbl').textContent='تسجيل';
+  }
+  aiBtn.addEventListener('click',()=>{ if(aiActive && aiPanel.classList.contains('show')) aiHide(); else aiStart(); });
+  document.getElementById('aiClose').addEventListener('click',aiHide);
+  aiScrim.addEventListener('click',aiHide);
+  document.getElementById('aiStopBtn').addEventListener('click',()=>{ aiStop(); aiHide(); });
+  document.getElementById('aiSaveBtn').addEventListener('click',aiHide);
+  document.querySelectorAll('#aiMode button').forEach(bm=>bm.addEventListener('click',()=>{
+    document.querySelectorAll('#aiMode button').forEach(x=>x.classList.remove('on')); bm.classList.add('on'); aiMode=bm.dataset.mode;
+  }));
+  (function(){
+    let moved=false, sx=0, sy=0;
+    aiBot.addEventListener('pointerdown',e=>{
+      e.preventDefault(); moved=false; sx=e.clientX; sy=e.clientY;
+      const onMove=ev=>{
+        if(Math.abs(ev.clientX-sx)>4||Math.abs(ev.clientY-sy)>4) moved=true;
+        const r=mapEl.getBoundingClientRect();
+        let x=(ev.clientX-r.left)/r.width*100, y=(ev.clientY-r.top)/r.height*100;
+        x=Math.max(4,Math.min(96,x)); y=Math.max(6,Math.min(94,y));
+        aiBot.style.left=x+'%'; aiBot.style.top=y+'%';
+      };
+      const onUp=()=>{ window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp); if(!moved) aiStart(); };
+      window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp);
+    });
+  })();
 
   // screen sharing: click share button → confirmation modal → active banner
   const ssScrim=document.getElementById('ssScrim');
