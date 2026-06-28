@@ -284,6 +284,18 @@
   /* avatars on the map */
   .seat{position:absolute;transform:translate(50%,-50%);z-index:5;
     opacity:0;animation:pop .5s var(--ease) forwards}
+  .seat.me{transition:top .55s var(--ease),inset-inline-start .55s var(--ease)}
+  .zone{cursor:pointer}
+  /* location chip + toast */
+  .loc-chip{display:flex;align-items:center;gap:7px;height:30px;padding:0 12px;background:var(--brand-soft);color:var(--brand);
+    border-radius:999px;font-size:12px;font-weight:700}
+  .loc-chip i{width:8px;height:8px;border-radius:50%;background:var(--brand)}
+  .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(10px);z-index:85;display:flex;align-items:center;gap:9px;
+    height:44px;padding:0 18px;background:#11142a;color:#fff;border-radius:13px;box-shadow:var(--sh-lg);font-size:13.5px;font-weight:600;
+    opacity:0;pointer-events:none;transition:.3s var(--ease)}
+  .toast.show{opacity:1;transform:translateX(-50%)}
+  .toast svg{color:var(--green)}
+  .ctx-empty{text-align:center;color:var(--muted);font-size:13px;padding:30px 14px}
   .seat .av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:600;
     font-size:13px;box-shadow:var(--sh-md);border:2.5px solid #fff;position:relative;transition:.18s var(--ease)}
   .seat:hover .av{transform:scale(1.08)}
@@ -823,6 +835,33 @@
       </div>
 
       <div class="side-scroll">
+        <!-- floors & rooms (allowed only) -->
+        <div class="sec-h">الطوابق والغرف</div>
+        <button class="floor active">
+          <span class="fi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 11l8-6 8 6M6 10v9h12v-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="ft">الطابق الثاني — التطوير</span><span class="cnt">١٢</span>
+        </button>
+        <div class="rooms">
+          <button class="room-i cur" data-room="meeting"><span class="rdot" style="background:var(--brand)"></span>قاعة الاجتماعات الكبرى<span class="rcap">٥</span></button>
+          <button class="room-i" data-room="focus"><span class="rdot" style="background:var(--amber)"></span>غرفة التركيز<span class="rcap">١</span></button>
+          <button class="room-i" data-room="team"><span class="rdot" style="background:var(--green)"></span>غرفة الفريق<span class="rcap">٢</span></button>
+          <button class="room-i" data-room="workspace"><span class="rdot" style="background:#5b8def"></span>منطقة العمل المفتوحة<span class="rcap">٤</span></button>
+          <button class="room-i" data-room="lounge"><span class="rdot" style="background:var(--faint)"></span>ركن الاستراحة<span class="rcap">٠</span></button>
+        </div>
+        <button class="floor">
+          <span class="fi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M3 9h18" stroke="currentColor" stroke-width="2"/></svg></span>
+          <span class="ft">طابق المنتج</span><span class="cnt">٧</span>
+        </button>
+        <button class="floor locked" title="غير مصرّح لك بدخول هذا الطابق">
+          <span class="fi"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/></svg></span>
+          <span class="ft">طابق الإدارة</span>
+          <span class="lk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+        </button>
+        <div class="perm-note">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8h.01M11 12h1v4h1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>تظهر الطوابق والغرف المصرّح لك بها فقط. إدارتها من صلاحيات المشرف.</span>
+        </div>
+
         <!-- channels -->
         <div class="ws-sec">
           <button class="ws-sec-h"><span class="c0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lbl">القنوات</span><span class="act">⋯</span></button>
@@ -873,6 +912,7 @@
           <div class="sub">أنت داخل المكتب • تحرّك بالنقر على الخريطة للانتقال بين المناطق</div>
         </div>
         <div class="live-pill"><i></i> ١٢ متصلًا الآن</div>
+        <div class="loc-chip" id="locChip"><i></i> أنت في: الممر</div>
         <div class="map-tools">
           <button class="furnish-btn" title="تجهيز مكتبك أنت فقط — متاح وفق صلاحيتك" onclick="window.location.href='customize.html'">
             <svg viewBox="0 0 24 24" fill="none"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -1062,58 +1102,28 @@
         <div class="row1">
           <div class="ri"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H4z" stroke="#fff" stroke-width="2"/><path d="M8 21h8M12 16v5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
           <div class="rt">
-            <b>قاعة الاجتماعات الكبرى</b>
-            <span>الطابق الثاني • ٥ مشاركين</span>
+            <b id="ctxRoomName">قاعة الاجتماعات الكبرى</b>
+            <span id="ctxRoomMeta">الطابق الثاني • ٥ مشاركين</span>
           </div>
         </div>
-        <div class="ctx-rec">
+        <div class="ctx-rec" id="ctxRec">
           <span class="blip"></span> يتم تسجيل هذا الاجتماع
           <span>بدأ ١٢:٤٠</span>
         </div>
       </div>
 
       <div class="ctx-tabs">
-        <button class="ctab active" data-pane="people">المشاركون <span class="b">٥</span></button>
+        <button class="ctab active" data-pane="people">المشاركون <span class="b" id="ctxPeopleCount">٥</span></button>
         <button class="ctab" data-pane="chat">المحادثة <span class="b">٣</span></button>
       </div>
 
       <div class="ctx-body">
-        <!-- participants pane -->
+        <!-- participants pane (rendered by JS per selected room) -->
         <div class="pane show" id="pane-people">
-          <div class="sect-h">يتحدّثون الآن</div>
-          <div class="pp">
-            <div class="av" style="background:linear-gradient(150deg,#e6845b,#c75a32)">س
-              <span class="mini"><svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M12 14a3 3 0 003-3V6a3 3 0 00-6 0v5a3 3 0 003 3z" fill="#1f9d6b"/></svg></span>
-            </div>
-            <div class="t"><b>سارة القحطاني</b><span>مديرة المنتج</span></div>
-            <span class="host">المضيف</span>
-          </div>
-
-          <div class="sect-h">المشاركون</div>
-          <div class="pp">
-            <div class="av" style="background:linear-gradient(150deg,#7b8cf0,#3b54d6)">ر</div>
-            <div class="t"><b>ريم الحربي <span class="you">أنت</span></b><span>مطوّرة واجهات</span></div>
-            <span class="mic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="10" rx="3" stroke="currentColor" stroke-width="2"/><path d="M6 11a6 6 0 0012 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </div>
-          <div class="pp">
-            <div class="av" style="background:linear-gradient(150deg,#4eb38a,#1f7d5c)">ف</div>
-            <div class="t"><b>فهد العتيبي</b><span>مهندس خلفية</span></div>
-            <span class="mic muted"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M9 9v2a3 3 0 004.5 2.6M15 11V6a3 3 0 00-5.8-1M6 11a6 6 0 009 5.2M12 19v2M4 4l16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </div>
-          <div class="pp">
-            <div class="av" style="background:linear-gradient(150deg,#d8859a,#b14f6d)">ن</div>
-            <div class="t"><b>نورة الزهراني</b><span>مصممة تجربة</span></div>
-            <span class="mic muted"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M9 9v2a3 3 0 004.5 2.6M15 11V6a3 3 0 00-5.8-1M6 11a6 6 0 009 5.2M12 19v2M4 4l16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </div>
-          <div class="pp">
-            <div class="av" style="background:linear-gradient(150deg,#d77fb8,#b14f8d)">ل</div>
-            <div class="t"><b>ليلى السبيعي</b><span>محلّلة بيانات</span></div>
-            <span class="mic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="10" rx="3" stroke="currentColor" stroke-width="2"/><path d="M6 11a6 6 0 0012 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-          </div>
-
-          <button class="btn-primary" style="margin-top:14px">
+          <div id="ctxPeople"></div>
+          <button class="btn-primary" id="ctxJoinBtn" style="margin-top:14px">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            انضمام إلى القاعة
+            <span class="lbl">الانضمام للغرفة</span>
           </button>
         </div>
 
@@ -1169,6 +1179,9 @@
   <div class="live"><span class="rdot"></span><div class="txt"><b>أنت تشارك شاشتك الآن</b><span>الموجودون في الغرفة يشاهدون شاشتك</span></div></div>
   <button class="ss-stop" id="ssStop"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="11" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 3l18 18M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>إيقاف المشاركة</button>
 </div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5 9-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="toastMsg"></span></div>
 
 <!-- ===== AI ASSISTANT PANEL (live meeting summary) ===== -->
 <div class="ai-scrim" id="aiScrim"></div>
@@ -1665,6 +1678,82 @@
     }
   });
   document.addEventListener('click',e=>{ if(!filterPop.contains(e.target)) filterPop.classList.remove('show'); });
+
+  // ===== rooms: details on click • move on map • join =====
+  const ROOMS={
+    meeting:{name:'قاعة الاجتماعات الكبرى',floor:'الطابق الثاني',rec:true,me:{is:'24%',top:'34%'},
+      people:[{n:'سارة القحطاني',role:'مديرة المنتج',i:'س',bg:'linear-gradient(150deg,#e6845b,#c75a32)',host:true,speak:true,mic:true},
+              {n:'ريم الحربي',role:'مطوّرة واجهات',i:'ر',bg:'linear-gradient(150deg,#7b8cf0,#3b54d6)',you:true,mic:true},
+              {n:'فهد العتيبي',role:'مهندس خلفية',i:'ف',bg:'linear-gradient(150deg,#4eb38a,#1f7d5c)',mic:false},
+              {n:'نورة الزهراني',role:'مصممة تجربة',i:'ن',bg:'linear-gradient(150deg,#d8859a,#b14f6d)',mic:false},
+              {n:'ليلى السبيعي',role:'محلّلة بيانات',i:'ل',bg:'linear-gradient(150deg,#d77fb8,#b14f8d)',mic:true}]},
+    focus:{name:'غرفة التركيز',floor:'الطابق الثاني',rec:false,me:{is:'80%',top:'18%'},
+      people:[{n:'خالد العنزي',role:'مطوّر واجهات',i:'خ',bg:'linear-gradient(150deg,#d8a14e,#b07a1f)',mic:false}]},
+    team:{name:'غرفة الفريق',floor:'الطابق الثاني',rec:false,me:{is:'80%',top:'46%'},
+      people:[{n:'ماجد العنزي',role:'مهندس DevOps',i:'م',bg:'linear-gradient(150deg,#4eb38a,#1f7d5c)',mic:true},
+              {n:'يوسف الدوسري',role:'مدير مشروع',i:'ي',bg:'linear-gradient(150deg,#6f7891,#474f66)',mic:false}]},
+    workspace:{name:'منطقة العمل المفتوحة',floor:'الطابق الثاني',rec:false,me:{is:'25%',top:'72%'},
+      people:[{n:'رهف الدوسري',role:'كاتبة محتوى',i:'ر',bg:'linear-gradient(150deg,#5bb6c9,#2d8499)',mic:false},
+              {n:'عبدالله القحطاني',role:'مهندس بيانات',i:'ع',bg:'linear-gradient(150deg,#d8a14e,#b07a1f)',mic:false}]},
+    lounge:{name:'ركن الاستراحة',floor:'الطابق الثاني',rec:false,me:{is:'80%',top:'80%'},people:[]},
+  };
+  const NAME2KEY={'قاعة الاجتماعات الكبرى':'meeting','غرفة التركيز':'focus','غرفة الفريق':'team','منطقة العمل المفتوحة':'workspace','ركن الاستراحة':'lounge'};
+  let selectedRoom='meeting', joinedRoom=null;
+  const MICON='<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="10" rx="3" stroke="currentColor" stroke-width="2"/><path d="M6 11a6 6 0 0012 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const MICOFF='<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M9 9v2a3 3 0 004.5 2.6M15 11V6a3 3 0 00-5.8-1M6 11a6 6 0 009 5.2M12 19v2M4 4l16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const ppHTML=(p,sp)=>{
+    const right=p.host?'<span class="host">المضيف</span>':'<span class="mic'+(p.mic?'':' muted')+'">'+(p.mic?MICON:MICOFF)+'</span>';
+    const mini=sp?'<span class="mini"><svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M12 14a3 3 0 003-3V6a3 3 0 00-6 0v5a3 3 0 003 3z" fill="#1f9d6b"/></svg></span>':'';
+    const you=p.you?' <span class="you">أنت</span>':'';
+    return '<div class="pp"><div class="av" style="background:'+p.bg+'">'+p.i+mini+'</div><div class="t"><b>'+p.n+you+'</b><span>'+p.role+'</span></div>'+right+'</div>';
+  };
+  function renderPeople(key){
+    const room=ROOMS[key], el=document.getElementById('ctxPeople');
+    if(!room.people.length){ el.innerHTML='<div class="ctx-empty">لا أحد في هذه الغرفة الآن — كن أول من ينضم.</div>'; return; }
+    let html=''; const sp=room.people.filter(p=>p.speak);
+    if(sp.length){ html+='<div class="sect-h">يتحدّثون الآن</div>'; sp.forEach(p=>html+=ppHTML(p,true)); }
+    html+='<div class="sect-h">المشاركون</div>'; room.people.filter(p=>!p.speak).forEach(p=>html+=ppHTML(p,false));
+    el.innerHTML=html;
+  }
+  function openRoom(key){
+    if(!ROOMS[key]) return;
+    selectedRoom=key; const room=ROOMS[key], cnt=room.people.length;
+    document.getElementById('ctxRoomName').textContent=room.name;
+    document.getElementById('ctxRoomMeta').textContent=room.floor+' • '+(cnt?cnt+' مشاركين':'لا أحد حاليًا');
+    document.getElementById('ctxPeopleCount').textContent=cnt;
+    document.getElementById('ctxRec').style.display=room.rec?'flex':'none';
+    renderPeople(key);
+    document.getElementById('ctxJoinBtn').querySelector('.lbl').textContent=(joinedRoom===key?'أنت في هذه الغرفة':'الانضمام للغرفة');
+    document.querySelectorAll('.zone').forEach(z=>{ const k=NAME2KEY[(z.querySelector('.zhead b')||{}).textContent]; z.classList.toggle('active-room',k===key); });
+    document.querySelectorAll('.room-i').forEach(r=>r.classList.toggle('cur',r.dataset.room===key));
+    const pt=document.querySelector('.ctab[data-pane="people"]'); if(pt && !pt.classList.contains('active')) pt.click();
+  }
+  document.querySelectorAll('.zone').forEach(z=>{ const k=NAME2KEY[(z.querySelector('.zhead b')||{}).textContent];
+    if(k) z.addEventListener('click',e=>{e.stopPropagation();openRoom(k);}); });
+  document.querySelectorAll('.room-i').forEach(r=>r.addEventListener('click',()=>openRoom(r.dataset.room)));
+
+  // move on map — click empty floor to walk there
+  const mapMove=document.querySelector('.map'), meSeat=document.querySelector('.seat.me');
+  const setLoc=t=>document.getElementById('locChip').innerHTML='<i></i> أنت في: '+t;
+  function toast(msg){ const t=document.getElementById('toast'); document.getElementById('toastMsg').textContent=msg; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),2600); }
+  mapMove.addEventListener('click',e=>{
+    if(e.target.closest('.zone')||e.target.closest('.seat')||e.target.closest('.ai-bot')) return;
+    const r=mapMove.getBoundingClientRect();
+    meSeat.style.insetInlineStart=((r.right-e.clientX)/r.width*100).toFixed(1)+'%';
+    meSeat.style.top=((e.clientY-r.top)/r.height*100).toFixed(1)+'%';
+    joinedRoom=null; setLoc('الممر');
+  });
+
+  // join the selected room
+  document.getElementById('ctxJoinBtn').addEventListener('click',()=>{
+    const room=ROOMS[selectedRoom];
+    meSeat.style.insetInlineStart=room.me.is; meSeat.style.top=room.me.top;
+    joinedRoom=selectedRoom; setLoc(room.name);
+    document.getElementById('ctxJoinBtn').querySelector('.lbl').textContent='أنت في هذه الغرفة';
+    toast('انضممت إلى ' + room.name);
+  });
+
+  openRoom('meeting'); // show meeting details by default (not yet joined)
 </script>
 </body>
 </html>
