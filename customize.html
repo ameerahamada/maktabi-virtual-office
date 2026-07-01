@@ -138,6 +138,25 @@
     filter:drop-shadow(0 8px 14px rgba(60,45,20,.28))}
   .my-room.drop-active{background:linear-gradient(180deg,rgba(122,46,192,.14),rgba(255,255,255,.45));
     box-shadow:0 0 0 3px var(--brand),0 0 0 8px var(--brand-soft)}
+
+  /* ============ RESPONSIVE (tablet + phone) ============ */
+  @media (max-width:820px){
+    .floor{inset:50px 14px 14px}
+    .panel{width:312px}
+  }
+  /* phones — panel becomes a bottom sheet so the floor stays visible above it */
+  @media (max-width:560px){
+    .office-top{flex-wrap:wrap;gap:6px 0;font-size:12px;padding:10px 14px}
+    .office-top .mode{margin-inline-start:auto}
+    .floor{inset:44px 10px calc(50vh + 8px) 10px}
+    .panel{top:auto;bottom:0;height:50vh;width:100vw;
+      border-radius:20px 20px 0 0;box-shadow:0 -14px 44px rgba(21,25,43,.22);
+      transform:translateY(30px);animation:sheetup .42s var(--ease) forwards}
+    .grid{grid-template-columns:1fr 1fr 1fr;gap:8px}
+    .item .thumb{height:60px}
+    .rooms-pane{padding:12px}
+  }
+  @keyframes sheetup{to{transform:none;opacity:1}}
 </style>
 </head>
 <body>
