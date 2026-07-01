@@ -326,6 +326,50 @@
   .inv-send:hover{background:#1b8d60}
   .inv-note{margin-top:16px;display:flex;gap:9px;padding:10px 12px;border-radius:11px;background:var(--surface-2);border:1px dashed var(--line);color:var(--muted);font-size:11.5px;line-height:1.6}
   .inv-note svg{flex:none;color:var(--faint);margin-top:1px}
+
+  /* ===================== RESPONSIVE ===================== */
+  .menu-btn{display:none;width:38px;height:38px;border-radius:10px;place-items:center;color:var(--ink-2);flex:none}
+  .menu-btn:hover{background:var(--surface-3)}
+  .side-scrim{position:fixed;inset:0;background:rgba(15,18,35,.35);z-index:55;display:none}
+  .side-scrim.show{display:block}
+
+  /* laptop-narrow / iPad landscape — drop the left context panel */
+  @media (max-width:1180px){
+    .context{display:none}
+    .map-frame{margin:8px 14px 16px}
+  }
+
+  /* iPad portrait / large phone — right sidebar becomes a drawer */
+  @media (max-width:860px){
+    .menu-btn{display:grid}
+    .sidebar{position:fixed;top:0;inset-inline-start:0;height:100vh;transform:translateX(100%);
+      transition:transform .3s var(--ease);z-index:60;box-shadow:var(--sh-lg)}
+    .sidebar.open{transform:none}
+    .rec-chip,.live-pill{display:none}
+    .search{width:auto;flex:1;min-width:0;margin-inline-end:0}
+    .furnish-btn{padding:0 11px}
+  }
+
+  /* phone */
+  @media (max-width:560px){
+    .topbar{gap:8px;padding:0 12px}
+    .brand,.crumb,.filter-btn{display:none}
+    .search{height:40px}
+    .stage-top{padding:12px 14px 0;flex-wrap:wrap;gap:8px}
+    .stage-top h1{font-size:15px}
+    .stage-top .sub{display:none}
+    .furnish-btn .lbl,.furnish-btn{font-size:11px}
+    .map-frame{margin:6px 8px 10px;border-radius:16px}
+    .dock{gap:0;padding:6px;border-radius:16px;bottom:14px;max-width:calc(100vw - 16px)}
+    .dctl{min-width:0;padding:7px 7px 5px}
+    .dctl .lbl{display:none}
+    .dctl svg{width:23px;height:23px}
+    .dock .sep{margin:6px 4px}
+    .dc-panel,.ai-panel,.context{width:100vw;max-width:100vw}
+    .uc-card{width:calc(100vw - 28px)}
+    .inv-modal{width:calc(100vw - 24px)}
+    .toast{bottom:78px;font-size:12.5px}
+  }
   .seat .av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:600;
     font-size:13px;box-shadow:var(--sh-md);border:2.5px solid #fff;position:relative;transition:.18s var(--ease)}
   .seat:hover .av{transform:scale(1.08)}
@@ -784,6 +828,7 @@
 
   <!-- ============ TOP BAR ============ -->
   <header class="topbar">
+    <button class="menu-btn" id="menuBtn" aria-label="القائمة"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     <div class="brand">
       <div class="mark">م</div>
       <div class="name">مكتبي<small>المكتب الافتراضي</small></div>
@@ -1209,6 +1254,9 @@
   <div class="live"><span class="rdot"></span><div class="txt"><b>أنت تشارك شاشتك الآن</b><span>الموجودون في الغرفة يشاهدون شاشتك</span></div></div>
   <button class="ss-stop" id="ssStop"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="11" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 3l18 18M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>إيقاف المشاركة</button>
 </div>
+
+<!-- ===== SIDEBAR DRAWER SCRIM (mobile) ===== -->
+<div class="side-scrim" id="sideScrim"></div>
 
 <!-- ===== INVITE MODAL ===== -->
 <div class="inv-scrim" id="invScrim">
@@ -1812,6 +1860,13 @@
   });
 
   openRoom('meeting'); // show meeting details by default (not yet joined)
+
+  // ===== responsive: sidebar drawer =====
+  const menuBtn=document.getElementById('menuBtn'), sideBar=document.querySelector('.sidebar'), sideScrim=document.getElementById('sideScrim');
+  const closeDrawer=()=>{ sideBar.classList.remove('open'); sideScrim.classList.remove('show'); };
+  menuBtn.addEventListener('click',()=>{ const o=sideBar.classList.toggle('open'); sideScrim.classList.toggle('show',o); });
+  sideScrim.addEventListener('click',closeDrawer);
+  sideBar.querySelectorAll('.room-i,.floor,.ws-ch,.ws-person').forEach(el=>el.addEventListener('click',()=>{ if(window.innerWidth<=860) closeDrawer(); }));
 
   // ===== invite to workspace =====
   const invScrim=document.getElementById('invScrim');
